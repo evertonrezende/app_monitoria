@@ -5,6 +5,7 @@ class  DrawerList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
+      
       child: ListView(
         children: <Widget>[
           ListTile(
@@ -15,9 +16,10 @@ class  DrawerList extends StatelessWidget {
             },
 
           ),
+           Divider(),
            ListTile(
             leading: Icon(Icons.help),
-            title: Text("Minhas Dúvidas",),
+            title: Text("MINHAS DÚVIDAS",),
             onTap: () {
               print("Item2");
               Navigator.pop(context);
@@ -26,16 +28,17 @@ class  DrawerList extends StatelessWidget {
           ),
            ListTile(
             leading: Icon(Icons.people),
-            title: Text("Monitores",),
+            title: Text("MONITORES",),
             onTap: () {
               print("Item3");
               Navigator.pop(context);
             },
 
           ),
+          Divider(),
             ListTile(
-            leading: Icon(Icons.close),
-            title: Text("Sair",),
+            leading: Icon(Icons.exit_to_app),
+            title: Text("SAIR",),
             onTap: () {
               print("Item3");
               Navigator.pop(context);

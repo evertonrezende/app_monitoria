@@ -39,15 +39,17 @@ class AppText extends StatelessWidget {
       },
       style: TextStyle(
         fontSize: 25,
-        color: Colors.blue,
+       // color: Colors.blue,
+        color: Color(0XFF009086), //cor do texto campo de Matricula e Senha
       ),
       decoration: InputDecoration(
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(16)
-        ),
+       // border: OutlineInputBorder(
+          //borderRadius: BorderRadius.circular(16)
+        //),
+      
         labelText: label,
         labelStyle: TextStyle(
-          fontSize: 25,
+          fontSize: 22,
           color: Colors.grey,
         ),
         hintText: hint,

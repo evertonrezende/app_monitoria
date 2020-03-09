@@ -1,4 +1,3 @@
-//import 'dart:ui';
 
 import 'package:app_distribuida2/utils/nav.dart';
 import 'package:app_distribuida2/widgets/app_button.dart';
@@ -37,9 +36,12 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   _body() {
+    
     return Form(
+      
       key: _formKey,
       child: Container(
+        color: const Color(0XFFFFFFFF),
         //padding: EdgeInsets.all(16),
         padding: EdgeInsets.only(
               top:30, left:30, right:30, bottom:20
@@ -47,9 +49,10 @@ class _LoginPageState extends State<LoginPage> {
         child: ListView(
           children: <Widget>[
             SizedBox(
-                  width: 130,
+                  //width: 400,
                   height: 130,
-                  child: Image.asset("assets/images/login2.png"),
+                  child: Image.asset("assets/images/v.jpg"),
+                  //child: Container(backgroundColor: ),
                 ),
                 SizedBox(
                   height: 20,
@@ -60,10 +63,12 @@ class _LoginPageState extends State<LoginPage> {
               "Digite a matrícula",
               controller: _tLogin,
               validator: _validateLogin,
-              //keyboardType: TextInputType.number,
-              keyboardType: TextInputType.emailAddress,
+              keyboardType: TextInputType.number,
+              //keyboardType: TextInputType.emailAddress,
               textInputAction: TextInputAction.next,
               nextFocus: _focusSenha,
+              
+              
             ),
             SizedBox(height: 10),
             AppText(
@@ -79,17 +84,21 @@ class _LoginPageState extends State<LoginPage> {
               height: 20,
             ),
             AppButton(
-              "Acessar",
+              
+              "Entrar",
               onPressed: _onClickLogin,
+              
             ),
                 Container(
                   height: 40,
                   
                   child: FlatButton(
                     child:Text(
+                      
                       "Esqueci minha senha",
                        style: TextStyle(
-                           color:Colors.blue,
+                           color:Color(0XFF009086),
+                           fontSize: 15.0,
                        ),
                       textAlign:TextAlign.center,
                     ),
