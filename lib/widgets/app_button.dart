@@ -13,15 +13,20 @@ class AppButton extends StatelessWidget {
       height: 60,
       
       child: RaisedButton(
+         
+        color: Color(0XFF009086),
+        splashColor: Colors.red,
         shape: new RoundedRectangleBorder(
-          borderRadius: new BorderRadius.circular(16),
+        borderRadius: new BorderRadius.circular(5),
+       
+                   
         ),
-        
-        color: Colors.blue,
+         
         child: Text(
           text,
           style: TextStyle(
             color: Colors.white,
+            
             fontSize: 22,
           ),
         ),
