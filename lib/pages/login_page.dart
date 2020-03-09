@@ -50,15 +50,11 @@ class _LoginPageState extends State<LoginPage> {
           children: <Widget>[
             SizedBox(
                   //width: 400,
-
-                  child: Image.asset("assets/images/v.jpg"),
+                  child: Image.asset("assets/images/v.jpg",
                   height: 200,
                   width: double.infinity,
                   fit:BoxFit.fill,
                   )
-                  height: 130,
-                  child: Image.asset("assets/images/v.jpg"),
-
                   //child: Container(backgroundColor: ),
                 ),
                 SizedBox(
@@ -79,19 +75,6 @@ class _LoginPageState extends State<LoginPage> {
                 textInputAction: TextInputAction.next,
                 nextFocus: _focusSenha,
               ),
-
-            AppText(
-              "Matrícula",
-              "Digite a matrícula",
-              controller: _tLogin,
-              validator: _validateLogin,
-              keyboardType: TextInputType.number,
-              //keyboardType: TextInputType.emailAddress,
-              textInputAction: TextInputAction.next,
-              nextFocus: _focusSenha,
-              
-              
-
             ),
             SizedBox(height: 10),
             Container (
@@ -120,12 +103,6 @@ class _LoginPageState extends State<LoginPage> {
               "Entrar",
               onPressed: _onClickLogin,
                ),
-
-            AppButton(
-              
-              "Entrar",
-              onPressed: _onClickLogin,
-              
             ),
                 Container(
                   height: 40,
