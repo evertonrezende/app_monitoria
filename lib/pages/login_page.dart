@@ -44,34 +44,44 @@ class _LoginPageState extends State<LoginPage> {
         color: const Color(0XFFFFFFFF),
         //padding: EdgeInsets.all(16),
         padding: EdgeInsets.only(
-              top:30, left:30, right:30, bottom:20
+              //top:30, left:30, right:30, bottom:20
           ),
         child: ListView(
           children: <Widget>[
             SizedBox(
                   //width: 400,
-                  height: 130,
-                  child: Image.asset("assets/images/v.jpg"),
+                  child: Image.asset("assets/images/v.jpg",
+                  height: 200,
+                  width: double.infinity,
+                  fit:BoxFit.fill,
+                  )
                   //child: Container(backgroundColor: ),
                 ),
                 SizedBox(
                   height: 20,
 
                 ),
-            AppText(
-              "Matrícula",
-              "Digite a matrícula",
-              controller: _tLogin,
-              validator: _validateLogin,
-              keyboardType: TextInputType.number,
-              //keyboardType: TextInputType.emailAddress,
-              textInputAction: TextInputAction.next,
-              nextFocus: _focusSenha,
-              
-              
+             Container (
+                padding: EdgeInsets.only(
+                top:15, left:30, right:30, bottom:20
+                ),
+              child: AppText(
+                "Matrícula",
+                "Digite a matrícula",
+                controller: _tLogin,
+                validator: _validateLogin,
+                keyboardType: TextInputType.number,
+                //keyboardType: TextInputType.emailAddress,
+                textInputAction: TextInputAction.next,
+                nextFocus: _focusSenha,
+              ),
             ),
             SizedBox(height: 10),
-            AppText(
+            Container (
+                padding: EdgeInsets.only(
+                left:30, right:30
+                ),
+            child: AppText(
               "Senha",
               "Digite a senha",
               controller: _tSenha,
@@ -80,14 +90,19 @@ class _LoginPageState extends State<LoginPage> {
               //keyboardType: TextInputType.number,
               focusNode: _focusSenha,
             ),
+            ),
             SizedBox(
               height: 20,
             ),
-            AppButton(
-              
+            Container (
+                padding: EdgeInsets.only(
+                left:30, right:30
+                ),
+            child:AppButton(
+               
               "Entrar",
               onPressed: _onClickLogin,
-              
+               ),
             ),
                 Container(
                   height: 40,
