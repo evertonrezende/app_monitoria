@@ -50,17 +50,23 @@ class _LoginPageState extends State<LoginPage> {
           children: <Widget>[
             SizedBox(
                   //width: 400,
+<<<<<<< HEAD
                   child: Image.asset("assets/images/v.jpg",
                   height: 200,
                   width: double.infinity,
                   fit:BoxFit.fill,
                   )
+=======
+                  height: 130,
+                  child: Image.asset("assets/images/v.jpg"),
+>>>>>>> 3486aa3c72691aef2c4298d1419576320459adc2
                   //child: Container(backgroundColor: ),
                 ),
                 SizedBox(
                   height: 20,
 
                 ),
+<<<<<<< HEAD
              Container (
                 padding: EdgeInsets.only(
                 top:15, left:30, right:30, bottom:20
@@ -75,6 +81,19 @@ class _LoginPageState extends State<LoginPage> {
                 textInputAction: TextInputAction.next,
                 nextFocus: _focusSenha,
               ),
+=======
+            AppText(
+              "Matrícula",
+              "Digite a matrícula",
+              controller: _tLogin,
+              validator: _validateLogin,
+              keyboardType: TextInputType.number,
+              //keyboardType: TextInputType.emailAddress,
+              textInputAction: TextInputAction.next,
+              nextFocus: _focusSenha,
+              
+              
+>>>>>>> 3486aa3c72691aef2c4298d1419576320459adc2
             ),
             SizedBox(height: 10),
             Container (
@@ -94,6 +113,7 @@ class _LoginPageState extends State<LoginPage> {
             SizedBox(
               height: 20,
             ),
+<<<<<<< HEAD
             Container (
                 padding: EdgeInsets.only(
                 left:30, right:30
@@ -103,6 +123,13 @@ class _LoginPageState extends State<LoginPage> {
               "Entrar",
               onPressed: _onClickLogin,
                ),
+=======
+            AppButton(
+              
+              "Entrar",
+              onPressed: _onClickLogin,
+              
+>>>>>>> 3486aa3c72691aef2c4298d1419576320459adc2
             ),
                 Container(
                   height: 40,
