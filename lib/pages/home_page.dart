@@ -63,7 +63,8 @@ class HomePage extends StatelessWidget {
               child: Container(
                 
                  decoration: BoxDecoration(
-                 color: Color(0XFFCEFFE4),
+                 //color: Color(0XFFCEFFE4),
+                  color: Colors.lightBlue[50],
                  //borderRadius: BorderRadius.circular(10)
                  ),
                  child: AppCardMaterias(),

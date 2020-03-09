@@ -104,7 +104,7 @@ class _LoginPageState extends State<LoginPage> {
               onPressed: _onClickLogin,
                ),
             ),
-                Container(
+                /*Container(
                   height: 40,
                   
                   child: FlatButton(
@@ -122,6 +122,7 @@ class _LoginPageState extends State<LoginPage> {
                     }
                   ),
                 )
+                */
           ],
         ),
         
