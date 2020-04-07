@@ -10,7 +10,7 @@ class LoginApi {
       'senha': senha,
     };
 
-    var response = await http.post(url, body: params);
+    var response = await http.post(url, body: params); //aguarda um retorn da requisição
 
     print('Response status: ${response.statusCode}');
     print('Response status: ${response.body}');
