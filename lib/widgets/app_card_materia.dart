@@ -103,10 +103,10 @@ class AppCardMaterias extends StatelessWidget {
       );
   }
 
-  void _onClickNavigator(BuildContext context, Widget page) async {
-    String s = await push(context, page);
-    print("Chamou pagina >> $s");
-  }
+  //void _onClickNavigator(BuildContext context, Widget page) async {
+    //String s = await push(context, page);
+   // print("Chamou pagina >> $s");
+  //}
     
   }
 

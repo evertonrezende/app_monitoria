@@ -1,12 +1,19 @@
 
 import 'package:flutter/material.dart';
 
+
 class AppButton extends StatelessWidget {
   String text;
   Function onPressed;
+  bool showProgress;
 
-  AppButton(this.text, {this.onPressed});
+  AppButton(this.text, {this.onPressed, this.showProgress = false});
 
+  
+  //_AppButtonState createState() => _AppButtonState();
+//}
+
+//class _AppButtonState extends State<AppButton> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -17,12 +24,17 @@ class AppButton extends StatelessWidget {
         color: Color(0XFF009086),
         splashColor: Colors.red,
         shape: new RoundedRectangleBorder(
-        borderRadius: new BorderRadius.circular(5),
-       
-                   
+            borderRadius: new BorderRadius.circular(5),       
         ),
          
-        child: Text(
+        child: showProgress
+                ? Center(
+                     child: CircularProgressIndicator(
+                       valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                     ),
+                  )
+        
+        : Text(
           text,
           style: TextStyle(
             color: Colors.white,

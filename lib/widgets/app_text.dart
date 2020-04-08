@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 
-class AppText extends StatelessWidget {
-  String label;
-  String hint;
-  bool password;
-  TextEditingController controller;
-  FormFieldValidator<String> validator;
-  TextInputType keyboardType;
-  TextInputAction textInputAction;
-  FocusNode focusNode;
-  FocusNode nextFocus;
+class AppText extends StatefulWidget {
+  //foi incluido o final nos atributos em virtude de um alerta do Flutter.
+  final String label;
+  final String hint;
+  final bool password;
+  final TextEditingController controller;
+  final FormFieldValidator<String> validator;
+  final TextInputType keyboardType;
+  final TextInputAction textInputAction;
+  final FocusNode focusNode;
+  final FocusNode nextFocus;
 
   AppText(
     this.label,
@@ -24,17 +25,22 @@ class AppText extends StatelessWidget {
   });
 
   @override
+  _AppTextState createState() => _AppTextState();
+}
+
+class _AppTextState extends State<AppText> {
+  @override
   Widget build(BuildContext context) {
     return TextFormField(
-      controller: controller,
-      obscureText: password,
-      validator: validator,
-      keyboardType: keyboardType,
-      textInputAction: textInputAction,
-      focusNode: focusNode,
+      controller: widget.controller,
+      obscureText: widget.password,
+      validator: widget.validator,
+      keyboardType: widget.keyboardType,
+      textInputAction: widget.textInputAction,
+      focusNode: widget.focusNode,
       onFieldSubmitted: (String text) {
-        if (nextFocus != null) {
-          FocusScope.of(context).requestFocus(nextFocus);
+        if (widget.nextFocus != null) {
+          FocusScope.of(context).requestFocus(widget.nextFocus);
         }
       },
       style: TextStyle(
@@ -47,12 +53,12 @@ class AppText extends StatelessWidget {
           //borderRadius: BorderRadius.circular(16)
         //),
       
-        labelText: label,
+        labelText: widget.label,
         labelStyle: TextStyle(
           fontSize: 22,
           color: Colors.grey,
         ),
-        hintText: hint,
+        hintText: widget.hint,
         hintStyle: TextStyle(
           fontSize: 16,
         ),

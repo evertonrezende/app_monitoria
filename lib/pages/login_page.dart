@@ -1,11 +1,14 @@
 
+import 'package:app_distribuida2/pages/usuario.dart';
+import 'package:app_distribuida2/utils/alert.dart';
 import 'package:app_distribuida2/utils/nav.dart';
 import 'package:app_distribuida2/widgets/app_button.dart';
 import 'package:app_distribuida2/widgets/app_text.dart';
 import 'package:flutter/material.dart';
 import 'home_page.dart';
 import 'login_api.dart';
-//import 'login_api.dart';
+import 'api_response.dart';
+
 class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -20,6 +23,8 @@ class _LoginPageState extends State<LoginPage> {
 
   final _focusSenha = FocusNode();
 
+  bool _showProgress = false;
+
   @override
   void initState() {
     super.initState();
@@ -28,9 +33,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //appBar: AppBar(
-      //  title: Text("Carros"),
-      //),
+      
       body: _body(),
     );
   }
@@ -70,8 +73,8 @@ class _LoginPageState extends State<LoginPage> {
                 "Digite a matrícula",
                 controller: _tLogin,
                 validator: _validateLogin,
-                keyboardType: TextInputType.number,
-                //keyboardType: TextInputType.emailAddress,
+               // keyboardType: TextInputType.number,   //mostra teclado númerico
+                //keyboardType: TextInputType.emailAddress,   //entrada de um campo de email
                 textInputAction: TextInputAction.next,
                 nextFocus: _focusSenha,
               ),
@@ -98,11 +101,15 @@ class _LoginPageState extends State<LoginPage> {
                 padding: EdgeInsets.only(
                 left:30, right:30
                 ),
+            
             child:AppButton(
                
               "Entrar",
               onPressed: _onClickLogin,
+              showProgress: _showProgress,
                ),
+
+
             ),
                 /*Container(
                   height: 40,
@@ -131,6 +138,8 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void _onClickLogin() async {
+   
+    //validação do formulário
     if (!_formKey.currentState.validate()) {
       return;
     }
@@ -140,15 +149,29 @@ class _LoginPageState extends State<LoginPage> {
 
     print("Login: $login, Senha: $senha");
 
-    bool ok = await LoginApi.login(login, senha);
+    setState((){
+           _showProgress = true;
+    });
 
-    if(ok){
+    //invoca API de login 
+    ApiResponse response = await LoginApi.login(login, senha);
+
+    if(response.ok){
+      
+      Usuario user = response.result;
+      print (">>> $user");
+
         push(context, HomePage());
     }else {
-      print("Login incorreto!");
+      alert(context, response.msg);
     }
-  }
 
+    //Este método é invocado novamente pois quando retonarmos da Home a animação de progresso não ficar executando
+    setState((){
+           _showProgress = false;
+    });
+  }
+    
   String _validateLogin(String text) {
     if (text.isEmpty) {
       return "Digite o login";
