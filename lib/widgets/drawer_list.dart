@@ -1,5 +1,7 @@
 
 import 'package:flutter/material.dart';
+import 'package:app_distribuida2/utils/nav.dart';
+import 'package:app_distribuida2/pages/login_page.dart';
 
 class  DrawerList extends StatelessWidget {
   @override
@@ -39,14 +41,16 @@ class  DrawerList extends StatelessWidget {
             ListTile(
             leading: Icon(Icons.exit_to_app),
             title: Text("SAIR",),
-            onTap: () {
-              print("Item3");
-              Navigator.pop(context);
-            },
+            onTap: () => _onClickLogout(context),
 
-          ),
+          )
         ],
       )
     );
   }
+}
+
+_onClickLogout(BuildContext context) {
+  Navigator.pop(context);
+  push(context, LoginPage());
 }
