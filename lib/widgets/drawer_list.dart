@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:app_distribuida2/utils/nav.dart';
-import 'package:app_distribuida2/pages/login_page.dart';
+import 'package:app_distribuida2/pages/login.page.dart';
 
 class DrawerList extends StatelessWidget {
   @override

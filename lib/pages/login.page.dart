@@ -1,12 +1,12 @@
-import 'package:app_distribuida2/pages/usuario.dart';
+import 'package:app_distribuida2/providers/login.provider.dart';
+import 'package:app_distribuida2/models/usuario.dart';
 import 'package:app_distribuida2/utils/alert.dart';
 import 'package:app_distribuida2/utils/nav.dart';
 import 'package:app_distribuida2/widgets/app_button.dart';
+import 'package:app_distribuida2/utils/api_response.dart';
 import 'package:app_distribuida2/widgets/app_text.dart';
 import 'package:flutter/material.dart';
-import 'home_page.dart';
-import 'login_api.dart';
-import 'api_response.dart';
+import 'home.page.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -18,7 +18,7 @@ class _LoginPageState extends State<LoginPage> {
   final _tLogin = TextEditingController();
   final _tSenha = TextEditingController();
   final _focusSenha = FocusNode();
-  
+
   bool _showProgress = false;
 
   @override
@@ -38,21 +38,17 @@ class _LoginPageState extends State<LoginPage> {
       key: _formKey,
       child: Container(
         color: const Color(0XFFFFFFFF),
-        //padding: EdgeInsets.all(16),
         padding: EdgeInsets.only(
-            //top:30, left:30, right:30, bottom:20
             ),
         child: ListView(
           children: <Widget>[
             SizedBox(
-                //width: 400,
                 child: Image.asset(
               "assets/images/v.jpg",
               height: 200,
               width: double.infinity,
               fit: BoxFit.fill,
             )
-                //child: Container(backgroundColor: ),
                 ),
             SizedBox(
               height: 20,
@@ -65,8 +61,6 @@ class _LoginPageState extends State<LoginPage> {
                 "Digite a matrícula",
                 controller: _tLogin,
                 validator: _validateLogin,
-                // keyboardType: TextInputType.number,   //mostra teclado númerico
-                //keyboardType: TextInputType.emailAddress,   //entrada de um campo de email
                 textInputAction: TextInputAction.next,
                 nextFocus: _focusSenha,
               ),
@@ -80,7 +74,6 @@ class _LoginPageState extends State<LoginPage> {
                 controller: _tSenha,
                 password: true,
                 validator: _validateSenha,
-                //keyboardType: TextInputType.number,
                 focusNode: _focusSenha,
               ),
             ),
@@ -117,7 +110,7 @@ class _LoginPageState extends State<LoginPage> {
     });
 
     //invoca API de login
-    ApiResponse response = await LoginApi.login(login, senha);
+    ApiResponse<Usuario> response = await LoginApi.login(login, senha);
 
     if (response.ok) {
       Usuario user = response.result;

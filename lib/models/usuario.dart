@@ -3,7 +3,6 @@ class Usuario {
   String nome;
   String email;
   String token;
-
   List<String> roles;
 
   Usuario.fromJson(Map<String,dynamic> map):
@@ -17,6 +16,4 @@ class Usuario {
   String toString() {
     return 'Usuario{login: $login, nome: $nome, email: $email, token: $token}';
   }
-
-
 }
