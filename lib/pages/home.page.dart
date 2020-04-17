@@ -1,7 +1,7 @@
 import 'package:app_distribuida2/models/disciplina.model.dart';
 import 'package:app_distribuida2/providers/disciplina.provider.dart';
-import 'package:app_distribuida2/utils/alert.dart';
 import 'package:app_distribuida2/models/api-response.model.dart';
+import 'package:app_distribuida2/utils/alert.dart';
 import 'package:app_distribuida2/widgets/cardDisciplina.widget.dart';
 import 'package:app_distribuida2/widgets/drawer_list.dart';
 import 'package:flutter/material.dart';
