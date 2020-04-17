@@ -1,5 +1,5 @@
 import 'package:app_distribuida2/providers/login.provider.dart';
-import 'package:app_distribuida2/models/usuario.dart';
+import 'package:app_distribuida2/models/usuario.model.dart';
 import 'package:app_distribuida2/utils/alert.dart';
 import 'package:app_distribuida2/utils/nav.dart';
 import 'package:app_distribuida2/widgets/app_button.dart';
