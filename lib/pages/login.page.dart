@@ -3,7 +3,7 @@ import 'package:app_distribuida2/models/usuario.model.dart';
 import 'package:app_distribuida2/utils/alert.dart';
 import 'package:app_distribuida2/utils/nav.dart';
 import 'package:app_distribuida2/widgets/app_button.dart';
-import 'package:app_distribuida2/utils/api_response.dart';
+import 'package:app_distribuida2/models/api-response.model.dart';
 import 'package:app_distribuida2/widgets/app_text.dart';
 import 'package:flutter/material.dart';
 import 'home.page.dart';

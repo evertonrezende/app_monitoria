@@ -1,7 +1,7 @@
 import 'package:app_distribuida2/models/disciplina.model.dart';
 import 'package:app_distribuida2/providers/disciplina.provider.dart';
 import 'package:app_distribuida2/utils/alert.dart';
-import 'package:app_distribuida2/utils/api_response.dart';
+import 'package:app_distribuida2/models/api-response.model.dart';
 import 'package:app_distribuida2/widgets/cardDisciplina.widget.dart';
 import 'package:app_distribuida2/widgets/drawer_list.dart';
 import 'package:flutter/material.dart';
@@ -90,8 +90,7 @@ class HomePage extends StatelessWidget {
   // Lista todas as disciplinas
   Future<List<Widget>> _getDisciplinas(context, [favoritas = false]) async {
     //invoca API de login
-    ApiResponse<List<Disciplina>> response =
-        await DisciplinaApi.getDisciplinas();
+    ApiResponse<List<Disciplina>> response = await DisciplinaApi.getDisciplinas();
     List<Widget> disciplinas = new List<Widget>();
 
     if (!response.ok) {

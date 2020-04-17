@@ -7,7 +7,7 @@ class ApiResponse<T> {
     ok = true;
   }
 
-   ApiResponse.error(this.msg){
+  ApiResponse.error(this.msg){
     ok = false;
   }
 }
