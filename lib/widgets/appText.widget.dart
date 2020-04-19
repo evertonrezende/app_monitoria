@@ -1,3 +1,4 @@
+import 'package:app_distribuida2/theme/colors.theme.dart';
 import 'package:flutter/material.dart';
 
 class AppText extends StatefulWidget {
@@ -45,14 +46,9 @@ class _AppTextState extends State<AppText> {
       },
       style: TextStyle(
         fontSize: 25,
-       // color: Colors.blue,
-        color: Color(0XFF009086), //cor do texto campo de Matricula e Senha
+        color: ColorTheme.primaryColor, //cor do texto campo de Matricula e Senha
       ),
-      decoration: InputDecoration(
-       // border: OutlineInputBorder(
-          //borderRadius: BorderRadius.circular(16)
-        //),
-      
+      decoration: InputDecoration(      
         labelText: widget.label,
         labelStyle: TextStyle(
           fontSize: 22,

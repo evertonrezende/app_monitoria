@@ -1,17 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:app_distribuida2/utils/nav.dart';
-import 'package:app_distribuida2/pages/login.page.dart';
+import 'package:app_distribuida2/utils/navigator.dart';
 
 class DrawerList extends StatelessWidget {
+  final String _nomeUsuario;
+
+  DrawerList(this._nomeUsuario);
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
         child: ListView(
       children: <Widget>[
-        _createOption("Olá Fulano", () {Navigator.pop(context);}),
+        _createOption("Olá $_nomeUsuario", () {popPage(context);}),
         Divider(),
-        _createOption("MINHAS DÚVIDAS", () {Navigator.pop(context);}, Icon(Icons.help)),
-        _createOption("MONITORES", () {Navigator.pop(context);}, Icon(Icons.people)),
+        _createOption("MINHAS DÚVIDAS", () {popPage(context);}, Icon(Icons.help)),
+        _createOption("MONITORES", () {
+          pushPage(context, '/home/monitores');
+        }, Icon(Icons.people)),
         Divider(),
         _createOption("SAIR", () {_onClickLogout(context);}, Icon(Icons.exit_to_app))
       ],
@@ -33,7 +38,7 @@ class DrawerList extends StatelessWidget {
 
   // Desloga o usuário da aplicação
   _onClickLogout(BuildContext context) {
-    Navigator.pop(context);
-    push(context, LoginPage());
+    popPage(context);
+    pushPage(context, '/');
   }
 }
