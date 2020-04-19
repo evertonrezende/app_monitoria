@@ -1,5 +1,5 @@
 import 'package:app_distribuida2/providers/api.provider.dart';
-import 'package:app_distribuida2/utils/api_response.dart';
+import 'package:app_distribuida2/models/apiResponse.model.dart';
 import 'package:app_distribuida2/models/usuario.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';

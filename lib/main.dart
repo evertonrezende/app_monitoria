@@ -1,5 +1,6 @@
+import 'package:app_distribuida2/theme/colors.theme.dart';
 import 'package:flutter/material.dart';
-import 'pages/login.page.dart';
+import 'package:app_distribuida2/routes.dart' as Routes;
 
 void main() => runApp(MyApp());
 
@@ -8,31 +9,21 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-
       theme: ThemeData(
-          accentColor: Colors.white, //cor da tabs
-          primaryColor: Colors.white,
-          brightness: Brightness.light,
-          //cardColor: Colors.white,
-          scaffoldBackgroundColor: Color(0XFF009086),
-          canvasColor: Color(0XFF69C2B0), //cor do Drawer (Menu)
-
-          //scaffoldBackgroundColor: Color(0XFFE6E6FA),
-          primaryTextTheme: TextTheme( 
-              title: TextStyle( 
-              color: Colors.white //cor padrão do Menu
-              )
-          ),
-          
-          iconTheme: IconThemeData(
-            color: Colors.white,
-          ),
-          
+        accentColor: Colors.white, //cor da tabs
+        primaryColor: Colors.white,
+        brightness: Brightness.light,
+        scaffoldBackgroundColor: ColorTheme.primaryColor,
+        canvasColor: ColorTheme.secondaryColor, //cor do Drawer (Menu)
+        primaryTextTheme: TextTheme(
+            title: TextStyle(color: Colors.white //cor padrão do Menu
+                )),
+        iconTheme: IconThemeData(
+          color: Colors.white,
+        ),
       ),
-      home:  LoginPage(),
-      );
-    }
+      initialRoute: '/',
+      onGenerateRoute: Routes.generateRoute,
+    );
   }
- 
- 
-
+}

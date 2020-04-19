@@ -1,0 +1,20 @@
+
+import 'package:flutter/material.dart';
+
+// Navega até uma rota específica
+Future pushPage(BuildContext context, String route, {Object paramenters}) {
+  return Navigator.of(context).pushNamed(route, arguments: paramenters);
+}
+
+// Navega até um Widget específico
+Future pushPageByWidget(BuildContext context, Widget page) {
+  return Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) {
+    return page;
+  }));
+}
+
+// Retorna até a última página acessada
+popPage(BuildContext context) {
+  return Navigator.pop(context);
+}
+
