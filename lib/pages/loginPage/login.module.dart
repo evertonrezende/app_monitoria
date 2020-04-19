@@ -1,7 +1,7 @@
 import 'package:app_distribuida2/providers/login.provider.dart';
 import 'package:app_distribuida2/models/apiResponse.model.dart';
+import 'package:app_distribuida2/models/usuario.model.dart';
 import 'package:app_distribuida2/utils/navigator.dart';
-import 'package:app_distribuida2/models/usuario.dart';
 import 'package:app_distribuida2/utils/alert.dart';
 import 'package:flutter/material.dart';
 
