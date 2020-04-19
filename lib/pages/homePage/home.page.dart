@@ -1,10 +1,10 @@
 import 'package:app_distribuida2/widgets/cardDisciplina.widget.dart';
 import 'package:app_distribuida2/widgets/drawerList.widget.dart';
 import 'package:app_distribuida2/models/disciplina.model.dart';
+import 'package:app_distribuida2/models/usuario.model.dart';
 import 'package:app_distribuida2/theme/colors.theme.dart';
-import 'package:app_distribuida2/models/usuario.dart';
 import 'package:flutter/material.dart';
-import './home.module.dart';
+import './home.module.dart' as Module;
 
 class HomePage extends StatelessWidget {
   final Usuario _userData;
@@ -42,7 +42,7 @@ class HomePage extends StatelessWidget {
   // Páginas das disciplinas
   _body(context) {
     return FutureBuilder<List<Disciplina>>(
-        future: getDisciplinas(context),
+        future: Module.getDisciplinas(context),
         builder: (context, AsyncSnapshot<List<Disciplina>> snapshot) {
           var disciplinasData = new List<Widget>();
           if (snapshot.hasData) 
@@ -68,7 +68,7 @@ class HomePage extends StatelessWidget {
   // Página das disciplinas marcadas como favoritas
   _bodyFavoritos(context) {
     return FutureBuilder<List<Disciplina>>(
-        future: getDisciplinas(context, true),
+        future: Module.getDisciplinas(context, true),
         builder: (context, AsyncSnapshot<List<Disciplina>> snapshot) {
           var disciplinasData = new List<Widget>();
           if (snapshot.hasData) 
