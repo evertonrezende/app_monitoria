@@ -33,15 +33,21 @@ class MateriasPage extends StatelessWidget {
   }
 
   _body(context) {
-    List<Widget> materiasCard = new List<Widget>();
-    var materias = Module.getMaterias(context, _disciplina.id);    
-    materias.forEach((m) => materiasCard.add(_cardMateria(context, m)));
+    return FutureBuilder(
+      future: Module.getMaterias(context, _disciplina.id),
+      builder: (context, AsyncSnapshot<List<Materia>> snapshot) {
+        List<Widget> materiasCard = new List<Widget>();
+        if (snapshot.hasData)
+          snapshot.data
+              .forEach((m) => materiasCard.add(_cardMateria(context, m)));
 
-    return Container(
-      color: ColorTheme.backgroundColor,
-      child: ListView(
-        children: materiasCard,
-      ),
+        return Container(
+          color: ColorTheme.backgroundColor,
+          child: ListView(
+            children: materiasCard,
+          ),
+        );
+      },
     );
   }
 
@@ -51,7 +57,8 @@ class MateriasPage extends StatelessWidget {
         title: Text(materia.nome),
         trailing: Icon(Icons.keyboard_arrow_right),
         onTap: () {
-          pushPage(context, '/home/disciplina/materias/conteudo', paramenters: materia);
+          pushPage(context, '/home/disciplina/materias/conteudo',
+              paramenters: materia);
         });
   }
 }

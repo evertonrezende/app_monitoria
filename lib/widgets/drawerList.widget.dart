@@ -1,18 +1,19 @@
+import 'package:app_distribuida2/models/usuario.model.dart';
 import 'package:app_distribuida2/utils/alertConfirm.dart';
 import 'package:flutter/material.dart';
 import 'package:app_distribuida2/utils/navigator.dart';
 
 class DrawerList extends StatelessWidget {
-  final String _nomeUsuario;
+  final Usuario _usuario;
 
-  DrawerList(this._nomeUsuario);
+  DrawerList(this._usuario);
 
   @override
   Widget build(BuildContext context) {
     return Drawer(
         child: ListView(
       children: <Widget>[
-        _createOption("Olá $_nomeUsuario", () {
+        _createOption("Olá ${_usuario.nome}", () {
           popPage(context);
         }),
         Divider(),
@@ -22,6 +23,9 @@ class DrawerList extends StatelessWidget {
         _createOption("MONITORES", () {
           pushPage(context, '/home/monitores');
         }, Icon(Icons.people)),
+        _usuario.isMonitor? _createOption("MÉTRICAS", () {
+          pushPage(context, '/home/metricas');
+        }, Icon(Icons.multiline_chart)) : null,
         Divider(),
         _createOption("SAIR", () {
           _onClickLogout(context);

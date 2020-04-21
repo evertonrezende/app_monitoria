@@ -33,7 +33,7 @@ class HomePage extends StatelessWidget {
                 Tab(text: "DISCIPLINAS"),
               ]),
         ),
-        drawer: DrawerList(this._userData.nome),
+        drawer: DrawerList(this._userData),
         body: TabBarView(children: [_bodyFavoritos(context), _body(context)]),
         floatingActionButton: _userData.isMonitor? _isMonitorFlag() : null,
         floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
