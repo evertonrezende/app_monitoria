@@ -1,21 +1,13 @@
-import 'package:flutter/material.dart';
+import 'package:app_distribuida2/models/materia.model.dart';
 
-  // Obtem a lista de materias de uma disciplina
-List<Widget> getMaterias(context, idDisciplina) {
-    const nomes = ['Algoritmos de Ordenação', 'Lista', 'Fila', 'Recursividade', 'Árvores Binárias'];
-    var materias = new List<Widget>();
+// Obtem a lista de materias de uma disciplina
+List<Materia> getMaterias(context, idDisciplina) {
+  List<Materia> materias = new List<Materia>();
+  materias.add(Materia.fromJson({'id': 1, 'nome': 'Algoritmos de Ordenação'}));
+  materias.add(Materia.fromJson({'id': 2, 'nome': 'Lista'}));
+  materias.add(Materia.fromJson({'id': 3, 'nome': 'Fila'}));
+  materias.add(Materia.fromJson({'id': 4, 'nome': 'Recursividade'}));
+  materias.add(Materia.fromJson({'id': 5, 'nome': 'Árvores Binárias'}));
 
-    nomes.forEach((nome) => {
-          materias.add(
-          ListTile(
-              leading: Icon(Icons.description),
-              title: Text(nome),
-              trailing: Icon(Icons.keyboard_arrow_right),
-              onTap: () {
-                print("OK");
-              })
-          )
-    });
-
-    return materias;
-  }
+  return materias;
+}

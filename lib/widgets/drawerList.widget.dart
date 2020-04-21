@@ -1,3 +1,4 @@
+import 'package:app_distribuida2/utils/alertConfirm.dart';
 import 'package:flutter/material.dart';
 import 'package:app_distribuida2/utils/navigator.dart';
 
@@ -11,14 +12,20 @@ class DrawerList extends StatelessWidget {
     return Drawer(
         child: ListView(
       children: <Widget>[
-        _createOption("Olá $_nomeUsuario", () {popPage(context);}),
+        _createOption("Olá $_nomeUsuario", () {
+          popPage(context);
+        }),
         Divider(),
-        _createOption("MINHAS DÚVIDAS", () {popPage(context);}, Icon(Icons.help)),
+        _createOption("MINHAS DÚVIDAS", () {
+          popPage(context);
+        }, Icon(Icons.help)),
         _createOption("MONITORES", () {
           pushPage(context, '/home/monitores');
         }, Icon(Icons.people)),
         Divider(),
-        _createOption("SAIR", () {_onClickLogout(context);}, Icon(Icons.exit_to_app))
+        _createOption("SAIR", () {
+          _onClickLogout(context);
+        }, Icon(Icons.exit_to_app))
       ],
     ));
   }
@@ -26,19 +33,21 @@ class DrawerList extends StatelessWidget {
   // Retorna um item do menu formatado
   ListTile _createOption(text, Function work, [Icon icon]) {
     return ListTile(
-          leading: icon,
-          title: Text(
-            text,
-          ),
-          onTap: () {
-            work();
-          },
-        );
+      leading: icon,
+      title: Text(
+        text,
+      ),
+      onTap: () {
+        work();
+      },
+    );
   }
 
   // Desloga o usuário da aplicação
   _onClickLogout(BuildContext context) {
-    popPage(context);
-    pushPage(context, '/');
+    alertConfirm(context, "Sair?", () {
+      popPage(context);
+      pushPage(context, '/');
+    }, Icons.exit_to_app);
   }
 }

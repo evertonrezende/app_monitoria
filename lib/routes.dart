@@ -1,7 +1,9 @@
+import 'package:app_distribuida2/pages/conteudoPage/conteudos.page.dart';
 import 'package:app_distribuida2/pages/materiasPage/materias.page.dart';
 import 'package:app_distribuida2/pages/monitoresPage/monitores.page.dart';
 import 'package:app_distribuida2/pages/loginPage/login.page.dart';
 import 'package:app_distribuida2/pages/homePage/home.page.dart';
+import 'package:app_distribuida2/pages/perguntasFrequentesPage/perguntasFrequentes.page.dart';
 import 'package:flutter/material.dart';
 
 
@@ -16,6 +18,10 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => MonitoresPage());
     case '/home/disciplina/materias':
       return MaterialPageRoute(builder: (context) => MateriasPage(settings.arguments));
+    case '/home/disciplina/materias/conteudo':
+      return MaterialPageRoute(builder: (context) => ConteudosPage(settings.arguments));
+    case '/home/disciplina/materias/perguntas-frequentes':
+      return MaterialPageRoute(builder: (context) => PerguntasFrequentes());
     default:
       return MaterialPageRoute(builder: (context) => LoginPage());
   }

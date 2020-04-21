@@ -3,6 +3,7 @@ class Usuario {
   String nome;
   String email;
   String token;
+  bool isMonitor = true;
   List<String> roles;
 
   Usuario.fromJson(Map<String,dynamic> map):

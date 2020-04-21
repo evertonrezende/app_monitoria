@@ -21,8 +21,8 @@ class HomePage extends StatelessWidget {
           iconTheme: new IconThemeData(color: Colors.white), //cor do menu
           backgroundColor: ColorTheme.primaryColor,
           bottom: TabBar(
-              unselectedLabelColor:
-                  ColorTheme.textUnselectedColor, //Cor do texto TabBar sem seleção
+              unselectedLabelColor: ColorTheme
+                  .textUnselectedColor, //Cor do texto TabBar sem seleção
               labelColor: Colors.white, //Cor do texto TabBar com seleção
               indicatorColor: Colors.white, // Cor da tab selecionada
               labelStyle: TextStyle(
@@ -35,6 +35,11 @@ class HomePage extends StatelessWidget {
         ),
         drawer: DrawerList(this._userData.nome),
         body: TabBarView(children: [_bodyFavoritos(context), _body(context)]),
+        floatingActionButton: _userData.isMonitor? _isMonitorFlag() : null,
+        floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+        bottomNavigationBar: new BottomAppBar(
+          color: Colors.white,
+        ),
       ),
     );
   }
@@ -45,8 +50,9 @@ class HomePage extends StatelessWidget {
         future: getDisciplinas(context),
         builder: (context, AsyncSnapshot<List<Disciplina>> snapshot) {
           var disciplinasData = new List<Widget>();
-          if (snapshot.hasData) 
-            snapshot.data.forEach((d) => disciplinasData.add(CardDisciplina(d, false)));
+          if (snapshot.hasData)
+            snapshot.data
+                .forEach((d) => disciplinasData.add(CardDisciplina(d, false)));
 
           return Container(
               child: Container(
@@ -71,8 +77,9 @@ class HomePage extends StatelessWidget {
         future: getDisciplinas(context, true),
         builder: (context, AsyncSnapshot<List<Disciplina>> snapshot) {
           var disciplinasData = new List<Widget>();
-          if (snapshot.hasData) 
-            snapshot.data.forEach((d) =>  disciplinasData.add(CardDisciplina(d, true)));
+          if (snapshot.hasData)
+            snapshot.data
+                .forEach((d) => disciplinasData.add(CardDisciplina(d, true)));
 
           return Container(
               child: Container(
@@ -89,5 +96,21 @@ class HomePage extends StatelessWidget {
                     children: disciplinasData,
                   )));
         });
+  }
+
+  // Flag indicadora que o usuário é um monitor
+  _isMonitorFlag() {
+    return FloatingActionButton.extended(
+      elevation: 50.0,
+      hoverColor: Colors.red,
+      icon: Icon(Icons.person),
+      label: Text('Monitor'),
+      onPressed: () {
+        print('clicou no botão');
+      },
+      backgroundColor: ColorTheme.secondaryColor,
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(20.0))),
+    );
   }
 }

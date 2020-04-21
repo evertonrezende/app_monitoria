@@ -1,8 +1,8 @@
-class Monitores {
+class Conteudo {
   int id;
   String nome;  
 
-  Monitores.fromJson(Map<String,dynamic> map):  
+  Conteudo.fromJson(Map<String,dynamic> map):  
       id = map["id"],
       nome = map["nome"];
 }

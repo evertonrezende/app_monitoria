@@ -1,4 +1,5 @@
 import 'package:app_distribuida2/models/disciplina.model.dart';
+import 'package:app_distribuida2/models/materia.model.dart';
 import 'package:app_distribuida2/theme/colors.theme.dart';
 import 'package:app_distribuida2/utils/navigator.dart';
 import 'package:flutter/material.dart';
@@ -32,11 +33,25 @@ class MateriasPage extends StatelessWidget {
   }
 
   _body(context) {
+    List<Widget> materiasCard = new List<Widget>();
+    var materias = Module.getMaterias(context, _disciplina.id);    
+    materias.forEach((m) => materiasCard.add(_cardMateria(context, m)));
+
     return Container(
       color: ColorTheme.backgroundColor,
       child: ListView(
-        children: Module.getMaterias(context, _disciplina.id),
+        children: materiasCard,
       ),
     );
+  }
+
+  _cardMateria(context, Materia materia) {
+    return ListTile(
+        leading: Icon(Icons.description),
+        title: Text(materia.nome),
+        trailing: Icon(Icons.keyboard_arrow_right),
+        onTap: () {
+          pushPage(context, '/home/disciplina/materias/conteudo', paramenters: materia);
+        });
   }
 }

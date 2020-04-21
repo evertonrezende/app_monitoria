@@ -1,4 +1,4 @@
-import 'package:app_distribuida2/models/monitores.model.dart';
+import 'package:app_distribuida2/models/monitor.model.dart';
 import 'package:app_distribuida2/theme/colors.theme.dart';
 import 'package:app_distribuida2/widgets/itemList.widget.dart';
 import 'package:flutter/material.dart';
@@ -22,9 +22,9 @@ class MonitoresPage extends StatelessWidget {
   }
   
   _body(context) {
-    return FutureBuilder<List<Monitores>>(
+    return FutureBuilder<List<Monitor>>(
         future: Module.getMonitores(context),
-        builder: (context, AsyncSnapshot<List<Monitores>> snapshot) {
+        builder: (context, AsyncSnapshot<List<Monitor>> snapshot) {
           var monitoresData = new List<Widget>();
           if (snapshot.hasData) 
             snapshot.data.forEach((m) => monitoresData.add(ItemList(m.nome, "Disciplina X | Disponível de 10:00 as 12:00")));
