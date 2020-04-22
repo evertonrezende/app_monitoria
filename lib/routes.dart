@@ -24,7 +24,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case '/home/disciplina/materias/conteudo':
       return MaterialPageRoute(builder: (context) => ConteudosPage(settings.arguments));
     case '/home/disciplina/materias/perguntas-frequentes':
-      return MaterialPageRoute(builder: (context) => PerguntasFrequentes());
+      return MaterialPageRoute(builder: (context) => PerguntasFrequentesPage());
     default:
       return MaterialPageRoute(builder: (context) => LoginPage());
   }

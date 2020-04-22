@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         accentColor: Colors.white, //cor da tabs
-        primaryColor: Colors.white,
+        primaryColor: Colors.grey[400],
         brightness: Brightness.light,
         scaffoldBackgroundColor: ColorTheme.primaryColor,
         canvasColor: ColorTheme.secondaryColor, //cor do Drawer (Menu)

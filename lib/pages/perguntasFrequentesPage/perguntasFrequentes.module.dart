@@ -4,7 +4,7 @@ import 'package:app_distribuida2/models/perguntaFrequente.model.dart';
 import 'package:app_distribuida2/models/apiResponse.model.dart';
 import 'package:app_distribuida2/utils/alert.dart';
 
-Future<List<PerguntaFrequente>> getperguntaFrequentees(context) async {
+Future<List<PerguntaFrequente>> getPerguntaFrequentes(context) async {
   ApiResponse<List<PerguntaFrequente>> response = await PerguntaFrequenteApi.getPerguntasFrequentes();
 
   if (!response.ok) {
