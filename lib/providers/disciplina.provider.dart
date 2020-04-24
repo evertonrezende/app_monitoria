@@ -6,7 +6,7 @@ import 'dart:convert';
 
 class DisciplinaApi extends ApiProvider {
 
-  // Realiza o login do usuário na plataforma
+  // Retorna as disciplinas cadastradas no sistema
   static Future<ApiResponse<List<Disciplina>>> getDisciplinas() async {
     //Tratamento de exceção em caso de indisponibilidades da rede
     try {

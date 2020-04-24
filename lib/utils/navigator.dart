@@ -1,5 +1,10 @@
-
 import 'package:flutter/material.dart';
+
+// Navega até uma rota específica substituindo-a pela última página acessada
+Future pushAndReplaceLastPage(BuildContext context, String route,
+    {Object paramenters}) {
+  return Navigator.of(context).pushReplacementNamed(route);
+}
 
 // Navega até uma rota específica
 Future pushPage(BuildContext context, String route, {Object paramenters}) {
@@ -8,7 +13,8 @@ Future pushPage(BuildContext context, String route, {Object paramenters}) {
 
 // Navega até um Widget específico
 Future pushPageByWidget(BuildContext context, Widget page) {
-  return Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) {
+  return Navigator.push(context,
+      MaterialPageRoute(builder: (BuildContext context) {
     return page;
   }));
 }
@@ -17,4 +23,3 @@ Future pushPageByWidget(BuildContext context, Widget page) {
 popPage(BuildContext context) {
   return Navigator.pop(context);
 }
-

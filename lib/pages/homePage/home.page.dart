@@ -1,3 +1,4 @@
+import 'package:app_distribuida2/utils/appStorage.dart';
 import 'package:app_distribuida2/widgets/cardDisciplina.widget.dart';
 import 'package:app_distribuida2/widgets/drawerList.widget.dart';
 import 'package:app_distribuida2/models/disciplina.model.dart';
@@ -6,10 +7,42 @@ import 'package:app_distribuida2/theme/colors.theme.dart';
 import 'package:flutter/material.dart';
 import './home.module.dart' as Module;
 
-class HomePage extends StatelessWidget {
-  final Usuario _userData;
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
 
-  HomePage(this._userData);
+class _HomePageState extends State<HomePage> {
+  List<Disciplina> _disciplinas = new List<Disciplina>();
+  List<Disciplina> _disciplinasFavoritas = new List<Disciplina>();
+  bool _isLoadDisciplinasFavoritas = true;
+  bool _isLoadDisciplinas = true;
+  Usuario _userData;
+
+  @override
+  void initState() {
+    super.initState();
+
+    AppStorage.getCurrentUser().then((user) {
+      setState(() {
+        _userData = user;
+      });
+    });
+
+    Module.getDisciplinas(context).then((disciplinas) {
+      setState(() {
+        _isLoadDisciplinas = false;
+        _disciplinas = disciplinas;
+      });
+    });
+
+    Module.getDisciplinas(context, true).then((disciplinasFavoritas) {
+      setState(() {
+        _isLoadDisciplinasFavoritas = false;
+        _disciplinasFavoritas = disciplinasFavoritas;
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,9 +66,11 @@ class HomePage extends StatelessWidget {
                 Tab(text: "DISCIPLINAS"),
               ]),
         ),
-        drawer: DrawerList(this._userData.nome),
+        drawer: DrawerList(_userData),
         body: TabBarView(children: [_bodyFavoritos(context), _body(context)]),
-        floatingActionButton: _userData.isMonitor? _isMonitorFlag() : null,
+        floatingActionButton: _userData != null
+            ? (_userData.isMonitor ? _isMonitorFlag() : null)
+            : null,
         floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
         bottomNavigationBar: new BottomAppBar(
           color: Colors.white,
@@ -44,61 +79,68 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  // Páginas das disciplinas
+  // Loading
+  _buildWaitingWidget() {
+    return Container(
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+        color: ColorTheme.backgroundNeutroColor,
+      ),
+      child: CircularProgressIndicator(),
+    );
+  }
+
+  // Cards de disciplinas
   _body(context) {
-    return FutureBuilder<List<Disciplina>>(
-        future: Module.getDisciplinas(context),
-        builder: (context, AsyncSnapshot<List<Disciplina>> snapshot) {
-          var disciplinasData = new List<Widget>();
-          if (snapshot.hasData)
-            snapshot.data
-                .forEach((d) => disciplinasData.add(CardDisciplina(d, false)));
-
-          return Container(
-              child: Container(
-                  decoration: BoxDecoration(
-                    color: ColorTheme.backgroundNeutroColor,
-                  ),
-                  child: GridView.count(
-                    primary: false,
-                    padding: const EdgeInsets.all(10),
+    return _isLoadDisciplinas
+        ? _buildWaitingWidget()
+        : Container(
+            child: Container(
+                decoration: BoxDecoration(
+                  color: ColorTheme.backgroundNeutroColor,
+                ),
+                child: GridView.builder(
+                  primary: false,
+                  padding: const EdgeInsets.all(10),
+                  itemCount: _disciplinas.length,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisSpacing: 10,
                     mainAxisSpacing: 10,
                     crossAxisCount: 2,
                     childAspectRatio: 2,
-                    children: disciplinasData,
-                  )));
-        });
+                  ),
+                  itemBuilder: (BuildContext context, int index) {
+                    return CardDisciplina(_disciplinas[index], false);
+                  },
+                )));
   }
 
-  // Página das disciplinas marcadas como favoritas
+  // Cards de disciplinas favoritas
   _bodyFavoritos(context) {
-    return FutureBuilder<List<Disciplina>>(
-        future: Module.getDisciplinas(context, true),
-        builder: (context, AsyncSnapshot<List<Disciplina>> snapshot) {
-          var disciplinasData = new List<Widget>();
-          if (snapshot.hasData)
-            snapshot.data
-                .forEach((d) => disciplinasData.add(CardDisciplina(d, true)));
-
-          return Container(
-              child: Container(
-                  decoration: BoxDecoration(
-                    color: ColorTheme.backgroundNeutroColor,
-                  ),
-                  child: GridView.count(
-                    primary: false,
-                    padding: const EdgeInsets.all(10),
+    return _isLoadDisciplinasFavoritas
+        ? _buildWaitingWidget()
+        : Container(
+            child: Container(
+                decoration: BoxDecoration(
+                  color: ColorTheme.backgroundNeutroColor,
+                ),
+                child: GridView.builder(
+                  primary: false,
+                  padding: const EdgeInsets.all(10),
+                  itemCount: _disciplinasFavoritas.length,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisSpacing: 10,
                     mainAxisSpacing: 10,
                     crossAxisCount: 2,
                     childAspectRatio: 2,
-                    children: disciplinasData,
-                  )));
-        });
+                  ),
+                  itemBuilder: (BuildContext context, int index) {
+                    return CardDisciplina(_disciplinasFavoritas[index], true);
+                  },
+                )));
   }
 
-  // Flag indicadora que o usuário é um monitor
+  // Flag que descreve que o aluno é um monitor
   _isMonitorFlag() {
     return FloatingActionButton.extended(
       elevation: 50.0,

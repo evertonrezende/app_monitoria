@@ -3,6 +3,7 @@ import 'package:app_distribuida2/models/apiResponse.model.dart';
 import 'package:app_distribuida2/models/usuario.model.dart';
 import 'package:app_distribuida2/utils/navigator.dart';
 import 'package:app_distribuida2/utils/alert.dart';
+import 'package:app_distribuida2/utils/appStorage.dart';
 import 'package:flutter/material.dart';
 
 // Verifica se uma senha é válida
@@ -35,6 +36,8 @@ Future<void> onClickLogin(context, GlobalKey<FormState> form, String login, Stri
   ApiResponse<Usuario> response = await LoginApi.login(login, senha);
 
   if (response.ok) {
+    await AppStorage.setCurrentUser(response.result);
+
     pushPage(context, '/home', paramenters: response.result);
   } else {
     alert(context, "Login", response.msg);

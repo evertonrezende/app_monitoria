@@ -4,7 +4,7 @@ import 'package:app_distribuida2/models/monitor.model.dart';
 import 'package:app_distribuida2/models/apiResponse.model.dart';
 import 'package:app_distribuida2/utils/alert.dart';
 
-// Obtém a lista de monitores
+// Obtém dados de métricas
 Future<List<Monitor>> getMonitores(context) async {
   ApiResponse<List<Monitor>> response = await MonitorApi.getMonitores();
 

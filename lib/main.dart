@@ -5,13 +5,14 @@ import 'package:app_distribuida2/routes.dart' as Routes;
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
+  
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         accentColor: Colors.white, //cor da tabs
-        primaryColor: Colors.white,
+        primaryColor: Colors.grey[400],
         brightness: Brightness.light,
         scaffoldBackgroundColor: ColorTheme.primaryColor,
         canvasColor: ColorTheme.secondaryColor, //cor do Drawer (Menu)
