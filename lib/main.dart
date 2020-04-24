@@ -5,6 +5,7 @@ import 'package:app_distribuida2/routes.dart' as Routes;
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
+  
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

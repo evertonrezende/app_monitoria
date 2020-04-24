@@ -19,10 +19,10 @@ class _PerguntasFrequentes extends State<PerguntasFrequentesPage> {
   void initState() {
     super.initState();
     Module.getPerguntaFrequentes(context).then((result) => {
-      setState(() {
-        _perguntas = _perguntasFiltered = result;
-      })
-    });
+          setState(() {
+            _perguntas = _perguntasFiltered = result;
+          })
+        });
   }
 
   @override
@@ -42,11 +42,11 @@ class _PerguntasFrequentes extends State<PerguntasFrequentesPage> {
               _searchBox(),
               Expanded(
                   child: ListView.builder(
-                itemCount: _perguntasFiltered.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return ColapsedItem(_perguntasFiltered[index].titulo,
-                      _perguntasFiltered[index].resposta);
-                },
+                    itemCount: _perguntasFiltered.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return ColapsedItem(_perguntasFiltered[index].titulo,
+                          _perguntasFiltered[index].resposta);
+                    },
               )),
             ])));
   }

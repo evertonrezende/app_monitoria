@@ -15,6 +15,6 @@ class Usuario {
   
   @override
   String toString() {
-    return 'Usuario{login: $login, nome: $nome, email: $email, token: $token}';
+    return '{"login": "$login", "nome": "$nome", "email": "$email", "token": "$token"}';
   }
 }
