@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
 class SearchBox extends StatefulWidget {
+  final String label;
   final Function _cancelAction;
   final Function(String) _editAction;
 
-  SearchBox(this._cancelAction, this._editAction);
+  SearchBox(this._cancelAction, this._editAction, this.label);
 
   @override
   _SearchBoxState createState() => _SearchBoxState();
@@ -35,7 +36,7 @@ class _SearchBoxState extends State<SearchBox> {
                 focusedBorder: UnderlineInputBorder(
                   borderSide: BorderSide(color: Colors.grey[400]),
                 ),
-                hintText: "Procure sua pergunta...",
+                hintText: widget.label,
                 hintStyle: TextStyle(color: Colors.grey),
                 suffixIcon: IconButton(
                   focusColor: Colors.red,

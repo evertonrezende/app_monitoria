@@ -62,7 +62,8 @@ class _PerguntasFrequentes extends State<PerguntasFrequentesPage> {
       setState(() {
         _perguntasFiltered = result;
       });
-    });
+    },
+    "Procure sua pergunta...");
   }
 
   // Realiza uma busca sobre a lista de perguntas

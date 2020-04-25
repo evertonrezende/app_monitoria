@@ -14,7 +14,8 @@ class MetricasPage extends StatelessWidget {
           onPressed: () => Navigator.of(context).pop(),
         ),
         title: Text("Métricas"),
-      )
+      ),
+      body: null,
     );
   }
 }
