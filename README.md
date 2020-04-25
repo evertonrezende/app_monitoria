@@ -1,8 +1,7 @@
 # ![Logo][logo] APP Monitoria ![Logo][logo]
 *Monitoria online para estudantes da PUC Minas!*
 
-O APP Monitoria é um aplicativo mobile desenvolvido por meio da tecnologia Flutter que visa possibilitar que alunos do curso de Sistemas de Informação da Pontifícia Universidade Católica de Minas Gerais possam sanar suas dúvidas por meio da monitoria online. Além disso, monitores conseguem ter a portabilidade e praticidade ao auxiliar alunos com respostas e conteúdos direcionados .
-Nossa solução busca integrar em um mesmo sistema funções como:
+O APP Monitoria é um aplicativo mobile desenvolvido por meio da tecnologia Flutter que visa possibilitar que alunos do curso de Sistemas de Informação da Pontifícia Universidade Católica de Minas Gerais possam sanar suas dúvidas por meio da monitoria online. Além disso, monitores conseguem ter a portabilidade e praticidade ao auxiliar alunos com respostas e conteúdos direcionados. Nossa solução busca integrar em um mesmo sistema funções como:
 - Postagem de dúvidas
 - Postagem de resposta a dúvidas existentes (Somente monitores)
 - Visualização de conteúdo das disciplinas
@@ -17,8 +16,8 @@ Contexto da Disciplina
 ------
 Este é um trabalho acadêmico realizado na **PUC Minas** na disciplina de **Desenvolvimento de Aplicações Distribuídas** 
 no curso de **Sistemas de Informação**.
-O intuito deste trabalho é projetar e construir um sistema em Flutter em acordo com demais sistemas que estão sendo projetados para montagem de uma aplicação de monitoria online. Neste contexto, estamos trabalhando no desenvolvimento do sistema de backend, aplicativo mobile de quizzes para alunos e sistema WEB para gestão dos professores da aplicação. Estes sistemas estão sendo projetados pelos demais grupos da disciplina
-Desta forma colocamos em prática conceitos adquiridos ao longo da formação da disciplina a respeito de aplicações distribuídas.
+O intuito deste trabalho é projetar e construir um sistema em Flutter em acordo com demais sistemas que estão sendo projetados para montagem de uma aplicação de monitoria online. Neste contexto, estamos trabalhando no desenvolvimento do sistema de backend, aplicativo mobile de quizzes para alunos e sistema WEB para gestão dos professores da aplicação. Estes sistemas estão sendo projetados pelos demais grupos da disciplina.
+Desta forma, colocamos em prática conceitos adquiridos ao longo da formação da disciplina a respeito de aplicações distribuídas.
 ***
 Equipe
 ------
