@@ -29,7 +29,7 @@ class _MetricasPageState extends State<MetricasPage> {
         _indiceDuvidasNaoResolvidas = result;
       });
     });
-    Module.getDuvidasNaoResolvidas(context).then((result) {
+    Module.getIndiceMateriasMaisDuvidas(context).then((result) {
       setState(() {
         _indiceMateriasComMaisDuvidas = result;
       });

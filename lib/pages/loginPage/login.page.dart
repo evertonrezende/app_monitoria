@@ -37,11 +37,11 @@ class _LoginPageState extends State<LoginPage> {
             _logo(),
             _textField("Matrícula", "Digite a matrícula", _tLogin,
                 Module.validateLogin,
-                action: TextInputAction.next, nextNode: _focusSenha),
+                action: TextInputAction.next, nextNode: _focusSenha, icon: Icons.person),
             _textField("Senha", "Digite a senha", _tSenha, Module.validateSenha,
                 isPassword: true,
                 action: TextInputAction.done,
-                focusNode: _focusSenha),
+                focusNode: _focusSenha, icon: Icons.lock),
             Container(
                 padding: EdgeInsets.only(top: 30, left: 30, right: 30),
                 child: _submit(context)),
@@ -55,7 +55,7 @@ class _LoginPageState extends State<LoginPage> {
   SizedBox _logo() {
     return SizedBox(
         child: Image.asset(
-      "assets/images/v.jpg",
+      "assets/images/login.jpg",
       height: 200,
       width: double.infinity,
       fit: BoxFit.fill,
@@ -65,7 +65,7 @@ class _LoginPageState extends State<LoginPage> {
   // Retorna um campo de texto preenchível
   Container _textField(String title, String description,
       TextEditingController controller, Function validator,
-      {bool isPassword = false, TextInputAction action, FocusNode nextNode, FocusNode focusNode}) {
+      {bool isPassword = false, TextInputAction action, FocusNode nextNode, FocusNode focusNode, IconData icon}) {
     return new Container(
       padding: EdgeInsets.only(top: 10, bottom: 10, left: 30, right: 30),
       child: AppText(title, description,
@@ -74,7 +74,8 @@ class _LoginPageState extends State<LoginPage> {
           controller: controller,
           validator: validator,
           textInputAction: action,
-          password: isPassword),
+          password: isPassword,
+          icon: icon),
     );
   }
 

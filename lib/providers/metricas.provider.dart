@@ -54,15 +54,15 @@ class MetricasApi extends ApiProvider {
       //Recebe a string no formato json e transforma no formato Map
       List<Metrica> mapResponse = new List<Metrica>();
       mapResponse
-          .add(Metrica.fromJson({'AED': 'Sem. 01', 'valor': 5.0}));
+          .add(Metrica.fromJson({'periodo': 'AED', 'valor': 5.0}));
       mapResponse
-          .add(Metrica.fromJson({'Grafos': 'Sem. 02', 'valor': 1.0}));
+          .add(Metrica.fromJson({'periodo': 'Grafos', 'valor': 1.0}));
       mapResponse
-          .add(Metrica.fromJson({'ATP': 'Sem. 03', 'valor': 4.0}));
+          .add(Metrica.fromJson({'periodo': 'ATP', 'valor': 4.0}));
       mapResponse
-          .add(Metrica.fromJson({'POO': 'Sem. 04', 'valor': 1.5}));
+          .add(Metrica.fromJson({'periodo': 'POO', 'valor': 1.5}));
       mapResponse
-          .add(Metrica.fromJson({'IHC': 'Sem. 05', 'valor': 3.0}));
+          .add(Metrica.fromJson({'periodo': 'IHC', 'valor': 3.0}));
 
       return ApiResponse.ok(mapResponse);
     } catch (error) {

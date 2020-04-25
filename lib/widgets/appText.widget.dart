@@ -2,7 +2,7 @@ import 'package:app_distribuida2/theme/colors.theme.dart';
 import 'package:flutter/material.dart';
 
 class AppText extends StatefulWidget {
-  //foi incluido o final nos atributos em virtude de um alerta do Flutter.
+  final IconData icon;
   final String label;
   final String hint;
   final bool password;
@@ -23,6 +23,7 @@ class AppText extends StatefulWidget {
     this.textInputAction,
     this.focusNode,
     this.nextFocus,
+    this.icon
   });
 
   @override
@@ -46,9 +47,10 @@ class _AppTextState extends State<AppText> {
       },
       style: TextStyle(
         fontSize: 25,
-        color: ColorTheme.primaryColor, //cor do texto campo de Matricula e Senha
+        color: ColorTheme.primaryColor,
       ),
-      decoration: InputDecoration(      
+      decoration: InputDecoration(  
+        prefixIcon: widget.icon != null? Icon(widget.icon) : null,    
         labelText: widget.label,
         labelStyle: TextStyle(
           fontSize: 22,
