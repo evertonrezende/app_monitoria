@@ -4,6 +4,7 @@ import 'package:app_distribuida2/widgets/drawerList.widget.dart';
 import 'package:app_distribuida2/models/disciplina.model.dart';
 import 'package:app_distribuida2/models/usuario.model.dart';
 import 'package:app_distribuida2/theme/colors.theme.dart';
+import 'package:app_distribuida2/widgets/searchBox.widget.dart';
 import 'package:flutter/material.dart';
 import './home.module.dart' as Module;
 
@@ -14,6 +15,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   List<Disciplina> _disciplinas = new List<Disciplina>();
+  List<Disciplina> _disciplinasFiltered = new List<Disciplina>();
   List<Disciplina> _disciplinasFavoritas = new List<Disciplina>();
   bool _isLoadDisciplinasFavoritas = true;
   bool _isLoadDisciplinas = true;
@@ -32,7 +34,7 @@ class _HomePageState extends State<HomePage> {
     Module.getDisciplinas(context).then((disciplinas) {
       setState(() {
         _isLoadDisciplinas = false;
-        _disciplinas = disciplinas;
+        _disciplinas = _disciplinasFiltered = disciplinas;
       });
     });
 
@@ -79,6 +81,35 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  // Retorna um campo de busca
+  Widget _searchBox() {
+    return Container(
+        decoration: BoxDecoration(
+          color: ColorTheme.backgroundNeutroColor,
+        ),
+        child: SearchBox(() {
+          setState(() {
+            _disciplinasFiltered = _disciplinas;
+          });
+        }, (String value) {
+          List<Disciplina> result = _filterDisciplinas(value);
+          setState(() {
+            _disciplinasFiltered = result;
+          });
+        }, "Procure uma disciplina..."),
+    );
+  }
+
+  // Realiza uma busca sobre a lista de perguntas
+  List<Disciplina> _filterDisciplinas(String value) {
+    List<Disciplina> filterList = new List<Disciplina>();
+    _disciplinas.forEach((p) {
+      var contains = p.nome.toLowerCase().contains(value.toLowerCase());
+      if (contains) filterList.add(p);
+    });
+    return filterList;
+  }
+
   // Loading
   _buildWaitingWidget() {
     return Container(
@@ -94,25 +125,30 @@ class _HomePageState extends State<HomePage> {
   _body(context) {
     return _isLoadDisciplinas
         ? _buildWaitingWidget()
-        : Container(
-            child: Container(
-                decoration: BoxDecoration(
-                  color: ColorTheme.backgroundNeutroColor,
-                ),
-                child: GridView.builder(
-                  primary: false,
-                  padding: const EdgeInsets.all(10),
-                  itemCount: _disciplinas.length,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisSpacing: 10,
-                    mainAxisSpacing: 10,
-                    crossAxisCount: 2,
-                    childAspectRatio: 2,
-                  ),
-                  itemBuilder: (BuildContext context, int index) {
-                    return CardDisciplina(_disciplinas[index], false);
-                  },
-                )));
+        : Column(
+            children: <Widget>[
+              _searchBox(),
+              Expanded(
+                  child: Container(
+                      decoration: BoxDecoration(
+                        color: ColorTheme.backgroundNeutroColor,
+                      ),
+                      child: GridView.builder(
+                        primary: false,
+                        padding: const EdgeInsets.all(10),
+                        itemCount: _disciplinasFiltered.length,
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisSpacing: 10,
+                          mainAxisSpacing: 10,
+                          crossAxisCount: 2,
+                          childAspectRatio: 2,
+                        ),
+                        itemBuilder: (BuildContext context, int index) {
+                          return CardDisciplina(_disciplinasFiltered[index], false);
+                        },
+                      )))
+            ],
+          );
   }
 
   // Cards de disciplinas favoritas

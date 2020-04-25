@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
 
+// Navega até uma rota específica e a declara como root eliminando todas as outras páginas da árvore
+Future pushPageAsRoot(BuildContext context, String route,
+    {Object paramenters}) {
+  return Navigator.of(context).pushNamedAndRemoveUntil(route, ModalRoute.withName(route));
+}
+
 // Navega até uma rota específica substituindo-a pela última página acessada
 Future pushAndReplaceLastPage(BuildContext context, String route,
     {Object paramenters}) {

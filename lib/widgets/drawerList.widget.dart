@@ -51,9 +51,10 @@ class DrawerList extends StatelessWidget {
   // Desloga o usuário da aplicação
   _onClickLogout(BuildContext context) {
     alertConfirm(context, "Sair?", () {
-      AppStorage.clearStorage();
-      popPage(context);
-      pushPage(context, '/');
+      AppStorage.clearStorage().then((value) {
+        popPage(context);
+        pushPageAsRoot(context, '/');
+      });
     }, Icons.exit_to_app);
   }
 }
