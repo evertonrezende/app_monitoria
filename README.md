@@ -1,7 +1,7 @@
-# ![Logo][logo] APP Monitoria ![Logo][logo]
+# ![Logo][logo] MAD (Monitoria Acadêmica Digital) ![Logo][logo]
 *Monitoria online para estudantes da PUC Minas!*
 
-O APP Monitoria é um aplicativo mobile desenvolvido por meio da tecnologia Flutter que visa possibilitar que alunos do curso de Sistemas de Informação da Pontifícia Universidade Católica de Minas Gerais possam sanar suas dúvidas por meio da monitoria online. Além disso, monitores conseguem ter a portabilidade e praticidade ao auxiliar alunos com respostas e conteúdos direcionados. Nossa solução busca integrar em um mesmo sistema funções como:
+O MAD é um aplicativo mobile desenvolvido por meio da tecnologia Flutter que visa possibilitar que alunos do curso de Sistemas de Informação da Pontifícia Universidade Católica de Minas Gerais possam sanar suas dúvidas por meio da monitoria online. Além disso, monitores conseguem ter a portabilidade e praticidade ao auxiliar alunos com respostas e conteúdos direcionados. Nossa solução busca integrar em um mesmo sistema funções como:
 - Postagem de dúvidas
 - Postagem de resposta a dúvidas existentes (Somente monitores)
 - Visualização de conteúdo das disciplinas
