@@ -14,12 +14,14 @@ class ConteudosPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: Module.getConteudos(context, _materia.id),
+        future: Module.getConteudos(context),
         builder: (context, AsyncSnapshot<List<Conteudo>> snapshot) {
           List<Widget> conteudosCard = new List<Widget>();
-          if (snapshot.hasData)
+          if (snapshot.hasData) {
             snapshot.data.forEach(
-                (c) => conteudosCard.add(_topicoItem(context, c.nome)));
+                (c) => conteudosCard.add(_topicoItem(context, c.id, c.nome)));
+                
+          }
 
           return Scaffold(
               appBar: AppBar(
@@ -42,7 +44,7 @@ class ConteudosPage extends StatelessWidget {
   }
 
   // ItemList de tópicos (conteúdo) da matéria
-  Widget _topicoItem(context, nome) {
+  Widget _topicoItem(context, id, nome) {
     return Card(
         color: Colors.greenAccent,
         child: ListTile(
@@ -50,10 +52,10 @@ class ConteudosPage extends StatelessWidget {
               Icons.school,
               size: 25.0,
             ),
-            title: Text("${_materia.nome} : $nome"),
-            subtitle: Text('Descrição do conteudo'),
+            title: Text("${_materia.nome} : $id"),
+            subtitle: Text("Descrição do conteudo ${nome}" ),
             onTap: () {
-              alertConfirm(context, "Deseja abrir o tópico \"$nome'\"?", () {
+              alertConfirm(context, "Deseja abrir o tópico \"$id'\"?", () {
                 popPage(context);
               }, Icons.class_);
             }));

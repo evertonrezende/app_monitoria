@@ -1,41 +1,27 @@
 import 'package:app_distribuida2/models/conteudo.model.dart';
 import 'package:app_distribuida2/providers/api.provider.dart';
 import 'package:app_distribuida2/models/apiResponse.model.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class ConteudoApi extends ApiProvider {
   // Retorna a conteúdo de uma matéria cadastrada no sistema
-  static Future<ApiResponse<List<Conteudo>>> getConteudos(int id_materia) async {
+  static Future<ApiResponse<List<Conteudo>>> getConteudos() async {
     //Tratamento de exceção em caso de indisponibilidades da rede
     try {
+      var response = await http.get(
+        "${ApiProvider.API_URL}/MaterialApoio",
+        headers: ApiProvider.createHeaderSync()
+      );
+      List mapResponse = json.decode(response.body);
+      if(response.statusCode == 200){
+        final conteudos = mapResponse.map((c) => Conteudo.fromJson(c)).toList();
+        return ApiResponse.ok(conteudos);
+      }
+
+      //return ApiResponse.error("Não foi possivel recuperar as disciplinas");
       //Recebe a string no formato json e transforma no formato Map
-      List<Conteudo> mapResponse = new List<Conteudo>();
-      mapResponse
-          .add(Conteudo.fromJson({'id': 1, 'nome': 'Algoritmos de Ordenação'}));
-      mapResponse.add(Conteudo.fromJson({
-        'id': 1,
-        'nome': 'Conteúdo 1',
-        'descricao': 'Descrição do conteúdo 1'
-      }));
-      mapResponse.add(Conteudo.fromJson({
-        'id': 2,
-        'nome': 'Conteúdo 2',
-        'descricao': 'Descrição do conteúdo 2'
-      }));
-      mapResponse.add(Conteudo.fromJson({
-        'id': 3,
-        'nome': 'Conteúdo 3',
-        'descricao': 'Descrição do conteúdo 3'
-      }));
-      mapResponse.add(Conteudo.fromJson({
-        'id': 4,
-        'nome': 'Conteúdo 4',
-        'descricao': 'Descrição do conteúdo 4'
-      }));
-      mapResponse.add(Conteudo.fromJson({
-        'id': 5,
-        'nome': 'Conteúdo 5',
-        'descricao': 'Descrição do conteúdo 5'
-      }));
+      
 
       return ApiResponse.ok(mapResponse);
     } catch (error) {
