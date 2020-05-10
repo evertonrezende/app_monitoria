@@ -9,19 +9,18 @@ class ConteudoApi extends ApiProvider {
   static Future<ApiResponse<List<Conteudo>>> getConteudos() async {
     //Tratamento de exceção em caso de indisponibilidades da rede
     try {
+      
       var response = await http.get(
-        "${ApiProvider.API_URL}/MaterialApoio",
-        headers: ApiProvider.createHeaderSync()
-      );
+          "${ApiProvider.API_URL}/MaterialApoio",
+          headers: ApiProvider.createHeaderSync());
       List mapResponse = json.decode(response.body);
-      if(response.statusCode == 200){
+      if (response.statusCode == 200) {
         final conteudos = mapResponse.map((c) => Conteudo.fromJson(c)).toList();
         return ApiResponse.ok(conteudos);
       }
 
       //return ApiResponse.error("Não foi possivel recuperar as disciplinas");
       //Recebe a string no formato json e transforma no formato Map
-      
 
       return ApiResponse.ok(mapResponse);
     } catch (error) {
