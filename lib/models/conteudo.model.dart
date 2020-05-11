@@ -4,5 +4,5 @@ class Conteudo {
 
   Conteudo.fromJson(Map<String,dynamic> map):  
       id = map["id"],
-      nome = map["nome"];
+      nome = map["conteudo"];
 }
