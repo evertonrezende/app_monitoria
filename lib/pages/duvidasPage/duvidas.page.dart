@@ -39,7 +39,7 @@ class _Duvidas extends State<DuvidasPage> {
             color: Colors.lightBlue[50],
             padding: EdgeInsets.all(10.0),
             child: Column(mainAxisSize: MainAxisSize.max, children: <Widget>[
-              _searchBox(),
+              _searchBox(), 
               Expanded(
                   child: ListView.builder(
                 itemCount: _duvidasFiltered.length,
