@@ -4,7 +4,7 @@ import 'dart:convert';
 class ApiProvider {
   static var API_URL = env.environment['API_URL'];
   static var API_TEST = env.environment['API_TEST'];
-
+  static var API_TEST2 = env.environment['API_TEST2'];
   // Cria um cabeçalho para uma requisição
   static createHeaderSync([bool isAuthenticated = false, String token]) {
     Map<String, String> header;
