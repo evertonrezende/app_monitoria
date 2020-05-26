@@ -1,5 +1,5 @@
 name: app_distribuida2
-description: A new Flutter project.
+description: Monitoria online para alunos do curso de Sistemas de Informação da PUC.
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -17,6 +17,9 @@ environment:
   sdk: ">=2.2.0 <3.0.0"
 
 dependencies:
+  dio: 1.0.0
+  http: ^0.12.0+4
+  shared_preferences: ^0.5.6
   flutter_secure_storage: ^3.3.3
   charts_flutter: ^0.9.0
   flutter:
@@ -27,11 +30,16 @@ dependencies:
   cupertino_icons: ^0.1.2
 
 dev_dependencies:
+  flutter_launcher_icons: ^0.7.5
   flutter_test:
-    sdk: flutter
-  dio: 1.0.0
-  http: ^0.12.0+4
-  shared_preferences: ^0.5.6
+    sdk: flutter    
+    
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/icon/icon.png"
+  adaptive_icon_background: "assets/icon/background.png"
+  adaptive_icon_foreground: "assets/icon/foreground.png"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
