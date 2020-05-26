@@ -119,6 +119,10 @@ class ConteudosPage extends StatelessWidget {
         if (choice == Opcoes.perguntas) {
           pushPage(context, '/home/disciplina/materias/perguntas-frequentes');
         }
+        else if (choice == Opcoes.duvidas) {
+          print("Clicou em duvidas");
+          pushPage(context, '/home/disciplina/materias/duvidas');
+        }
       },
       itemBuilder: (BuildContext context) {
         return Opcoes.opcoes.map((String choice) {
