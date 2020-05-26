@@ -58,7 +58,7 @@ class ConteudosPage extends StatelessWidget {
                   size: 25.0,
                 ),
                 title: Text("${_materia.nome}"),
-                subtitle: Text("\nId do Conteúdo: ${id} " + "\nDescrição do conteudo: ${nome}"),
+                subtitle: Text("\nId do Conteúdo: $id " + "\nDescrição do conteudo: $nome"),
                 onTap: () {
                   alertConfirm(context, "Deseja abrir o tópico \"$id'\"?", () {
                     popPage(context);

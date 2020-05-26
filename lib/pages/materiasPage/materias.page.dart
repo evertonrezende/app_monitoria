@@ -5,10 +5,18 @@ import 'package:app_distribuida2/utils/navigator.dart';
 import 'package:flutter/material.dart';
 import './materias.module.dart' as Module;
 
-class MateriasPage extends StatelessWidget {
+class MateriasPage extends StatefulWidget {
   final Disciplina _disciplina;
-
   MateriasPage(this._disciplina);
+
+  @override
+  _MateriasPageState createState() => _MateriasPageState(_disciplina);
+}
+
+class _MateriasPageState extends State<MateriasPage> {
+  Disciplina _disciplina;
+
+  _MateriasPageState(this._disciplina);
 
   @override
   Widget build(BuildContext context) {
@@ -18,15 +26,19 @@ class MateriasPage extends StatelessWidget {
         backgroundColor: ColorTheme.primaryColor,
         actions: <Widget>[
           IconButton(
-              icon: Icon(Icons.star_border),
+              icon: Icon(widget._disciplina.favorita? Icons.star : Icons.star_border),
               color: Colors.yellowAccent,
-              onPressed: () {}),
+              onPressed: () {
+                setState(() {
+                  _disciplina.favorita = !_disciplina.favorita;
+                });
+              }),
         ],
         leading: new IconButton(
           icon: new Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () => popPage(context),
         ),
-        title: Text(_disciplina.nome),
+        title: Text(widget._disciplina.nome),
       ),
       body: _body(context),
     );
@@ -34,7 +46,7 @@ class MateriasPage extends StatelessWidget {
 
   _body(context) {
     return FutureBuilder(
-      future: Module.getMaterias(context, _disciplina.id),
+      future: Module.getMaterias(context, widget._disciplina.id),
       builder: (context, AsyncSnapshot<List<Materia>> snapshot) {
         List<Widget> materiasCard = new List<Widget>();
         if (snapshot.hasData)
@@ -42,7 +54,7 @@ class MateriasPage extends StatelessWidget {
               .forEach((m) => materiasCard.add(_cardMateria(context, m)));
 
         return Container(
-          color: ColorTheme.backgroundColor,
+          color: ColorTheme.backgroundNeutroColor,
           child: ListView(
             children: materiasCard,
           ),
