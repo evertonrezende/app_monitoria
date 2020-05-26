@@ -53,6 +53,11 @@ class _HomePageState extends State<HomePage> {
       child: Scaffold(
         appBar: AppBar(
           centerTitle: true,
+          actions: <Widget>[
+            _userData != null
+            ? (_userData.isMonitor ? _isMonitorFlag() : null)
+            : null
+          ],
           iconTheme: new IconThemeData(color: Colors.white), //cor do menu
           backgroundColor: ColorTheme.primaryColor,
           bottom: TabBar(
@@ -70,9 +75,6 @@ class _HomePageState extends State<HomePage> {
         ),
         drawer: DrawerList(_userData),
         body: TabBarView(children: [_bodyFavoritos(context), _body(context)]),
-        floatingActionButton: _userData != null
-            ? (_userData.isMonitor ? _isMonitorFlag() : null)
-            : null,
         floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
         bottomNavigationBar: new BottomAppBar(
           color: Colors.white,
@@ -178,17 +180,23 @@ class _HomePageState extends State<HomePage> {
 
   // Flag que descreve que o aluno é um monitor
   _isMonitorFlag() {
-    return FloatingActionButton.extended(
-      elevation: 50.0,
-      hoverColor: Colors.red,
-      icon: Icon(Icons.person),
-      label: Text('Monitor'),
-      onPressed: () {
-        print('clicou no botão');
-      },
-      backgroundColor: ColorTheme.secondaryColor,
-      shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(20.0))),
+    return Center(
+      // icon: Icon(Icons.star),
+      child: Padding(
+        padding: EdgeInsets.only(right: 10),
+        child: RichText(
+          text: TextSpan(
+            children: [
+              WidgetSpan(
+                child: Icon(Icons.star, size: 16),
+              ),
+              TextSpan(
+                text: " Monitor",
+              ),
+            ],
+          ),
+        )
+      )
     );
   }
 }
