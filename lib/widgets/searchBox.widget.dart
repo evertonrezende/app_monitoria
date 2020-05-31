@@ -38,14 +38,14 @@ class _SearchBoxState extends State<SearchBox> {
                 ),
                 hintText: widget.label,
                 hintStyle: TextStyle(color: Colors.grey),
-                suffixIcon: IconButton(
+                suffixIcon: _controller.text.length > 0? IconButton(
                   focusColor: Colors.red,
                   icon: Icon(Icons.cancel),
                   onPressed: () {
                     WidgetsBinding.instance.addPostFrameCallback((_) => _controller.clear());
                     widget._cancelAction();
                   },
-                )
+                ) : null
             )
         )
       );

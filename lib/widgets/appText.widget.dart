@@ -46,14 +46,14 @@ class _AppTextState extends State<AppText> {
         }
       },
       style: TextStyle(
-        fontSize: 25,
+        fontSize: 16,
         color: ColorTheme.primaryColor,
       ),
       decoration: InputDecoration(  
         prefixIcon: widget.icon != null? Icon(widget.icon) : null,    
         labelText: widget.label,
         labelStyle: TextStyle(
-          fontSize: 22,
+          fontSize: 18,
           color: Colors.grey,
         ),
         hintText: widget.hint,

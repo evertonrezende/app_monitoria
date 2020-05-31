@@ -5,9 +5,8 @@ import 'package:flutter/material.dart';
 
 class CardDisciplina extends StatelessWidget {
   final Disciplina _disciplina;
-  final bool _favoritas;
 
-  CardDisciplina(this._disciplina, this._favoritas);
+  CardDisciplina(this._disciplina);
 
   @override
   Widget build(BuildContext context) {
@@ -21,32 +20,22 @@ class CardDisciplina extends StatelessWidget {
             color: ColorTheme.secondaryColor,
             borderRadius: BorderRadius.circular(10),
           ),
-          padding: _favoritas
+          padding: _disciplina.favorita
               ? const EdgeInsets.only(top: 2, right: 2)
               : const EdgeInsets.all(8),
-          child: _favoritas ? _getContentFavorito() : _getContent(),
+          child: _getContent(_disciplina.favorita),
           alignment: Alignment.center,
         ));
   }
 
-  // Conteúdo para cards normais
-  Text _getContent() {
-    return new Text(
-      _disciplina.nome,
-      style: new TextStyle(
-        color: Colors.black,
-      ),
-    );
-  }
-
   // Conteúdo para card tipo favorito
-  Column _getContentFavorito() {
+  Column _getContent(bool favorita) {
     return Column(
       children: <Widget>[
         Container(
           alignment: Alignment.topRight,
           child: Icon(
-            Icons.star,
+            favorita? Icons.star : Icons.star_border,
             color: Colors.yellowAccent,
           ),
         ),

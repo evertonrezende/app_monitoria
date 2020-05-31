@@ -1,20 +1,35 @@
 class Usuario {
+  int id;
   String login;
   String nome;
-  String email;
+  String senha;
   String token;
-  bool isMonitor = true;
-  List<String> roles;
+  bool isMonitor;
+
+  Usuario(this.login, this.nome, this.senha, this.token, this.isMonitor);
 
   Usuario.fromJson(Map<String,dynamic> map):
+      id = int.parse(map["id"].toString()),
       login = map["login"],
       nome = map["nome"],
-      email = map["email"],
-      token = map["token"],
-      roles = map["roles"] != null ? map["roles"].map<String>((role) => role.toString()).toList(): null;
+      senha = map["senha"],
+      isMonitor = map["isMonitor"].toString() == 'true' || map["isMonitor"].toString() == '1'? true : false,
+      token = map["token"];
+
+   toJson() {
+    return <String, dynamic> {
+      'id': id,
+      'login': login,
+      'nome': nome,
+      'senha': senha,
+      'token': token,
+      'isMonitor': isMonitor
+    };
+  }
   
   @override
   String toString() {
-    return '{"login": "$login", "nome": "$nome", "email": "$email", "token": "$token"}';
+    print( '{"id": "$id", "login": "$login", "nome": "$nome", "senha": "$senha", "token": "$token", "isMonitor": "$isMonitor"}');
+    return '{"id": "$id", "login": "$login", "nome": "$nome", "senha": "$senha", "token": "$token", "isMonitor": "$isMonitor"}';
   }
 }

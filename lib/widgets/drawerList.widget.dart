@@ -24,9 +24,9 @@ class DrawerList extends StatelessWidget {
         _createOption("MONITORES", () {
           pushPage(context, '/home/monitores');
         }, Icon(Icons.people)),
-        _usuario != null? (_usuario.isMonitor? _createOption("MÉTRICAS", () {
+        if(_usuario != null && _usuario.isMonitor) _createOption("MÉTRICAS", () {
           pushPage(context, '/home/metricas');
-        }, Icon(Icons.multiline_chart)) : null) : null,
+        }, Icon(Icons.multiline_chart)),
         Divider(),
         _createOption("SAIR", () {
           _onClickLogout(context);

@@ -10,7 +10,10 @@ class AppStorage {
     try {
       var response = await _storage.read(key: "user");
 
-      if (response != null) return Usuario.fromJson(json.decode(response));
+      if (response != null) {
+        var a = json.decode(response);
+        return Usuario.fromJson(a);
+      }
 
       return null;
     } catch (e) {

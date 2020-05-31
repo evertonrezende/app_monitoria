@@ -38,7 +38,7 @@ Future<void> onClickLogin(context, GlobalKey<FormState> form, String login, Stri
   if (response.ok) {
     await AppStorage.setCurrentUser(response.result);
 
-    pushPage(context, '/home', paramenters: response.result);
+    pushPageAsRoot(context, '/home', paramenters: response.result);
   } else {
     alert(context, "Login", response.msg);
   }

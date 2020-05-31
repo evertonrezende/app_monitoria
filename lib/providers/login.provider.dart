@@ -1,33 +1,26 @@
 import 'package:app_distribuida2/providers/api.provider.dart';
 import 'package:app_distribuida2/models/apiResponse.model.dart';
 import 'package:app_distribuida2/models/usuario.model.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+import 'package:sqflite/sqflite.dart';
 
 class LoginApi extends ApiProvider {
 
   // Realiza o login do usuário na plataforma
   static Future<ApiResponse<Usuario>> login(String login, String senha) async {
-    //Tratamento de exceção em caso de indisponibilidades da rede
     try {
-      var response = await http.post(
-        "${ApiProvider.API_TEST}/login",
-        body: ApiProvider.createStringRequestSync({"username": login, "password": senha}),
-        headers: ApiProvider.createHeaderSync());
+      Database db = await ApiProvider.getDatabase();
+      List<Map> mapResponse = await db.query('usuarios',
+        where: 'login = ? AND senha = ?', whereArgs: [login, senha], limit: 1);
 
       //Recebe a string no formato json e transforma no formato Map
-      Map mapResponse = json.decode(response.body);
-
-      if (response.statusCode == 200) {
-        final user = Usuario.fromJson(mapResponse);
+      if(mapResponse.length > 0) {      
+        final user = Usuario.fromJson(mapResponse.first);
         return ApiResponse.ok(user);
       }
 
-      // error é o que é retornado da API caso o login ou senha esteja incorreto
-      return ApiResponse.error(mapResponse["error"]);
+      return ApiResponse.error("Login ou senha incorretos!");
     } 
     catch (error) {
-      //Esse tratamento é uma mensagem genérica em caso de perda de conexão, problema do webservice, etc...
       return ApiResponse.error("Não foi possível fazer o login");
     }
   }

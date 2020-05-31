@@ -2,7 +2,6 @@ import 'package:app_distribuida2/widgets/submitButton.widget.dart';
 import 'package:app_distribuida2/widgets/appText.widget.dart';
 import 'package:flutter/material.dart';
 import './login.module.dart' as Module;
-import 'dart:ui';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -43,7 +42,7 @@ class _LoginPageState extends State<LoginPage> {
                 action: TextInputAction.done,
                 focusNode: _focusSenha, icon: Icons.lock),
             Container(
-                padding: EdgeInsets.only(top: 30, left: 30, right: 30),
+                padding: EdgeInsets.only(top: 0, left: 30, right: 30),
                 child: _submit(context)),
           ],
         ),
@@ -54,12 +53,10 @@ class _LoginPageState extends State<LoginPage> {
   // Retorna a logo da aplicação
   SizedBox _logo() {
     return SizedBox(
-        child: Image.asset(
-      "assets/images/login.jpg",
-      height: 200,
-      width: double.infinity,
-      fit: BoxFit.fill,
-    ));
+        child: Image(
+          image: AssetImage("assets/images/login.png")
+        )
+    );
   }
 
   // Retorna um campo de texto preenchível

@@ -14,12 +14,13 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
   List<Disciplina> _disciplinas = new List<Disciplina>();
   List<Disciplina> _disciplinasFiltered = new List<Disciplina>();
-  List<Disciplina> _disciplinasFavoritas = new List<Disciplina>();
-  bool _isLoadDisciplinasFavoritas = true;
   bool _isLoadDisciplinas = true;
   Usuario _userData;
+
+  final double _headerLength = 150;
 
   @override
   void initState() {
@@ -37,71 +38,182 @@ class _HomePageState extends State<HomePage> {
         _disciplinas = _disciplinasFiltered = disciplinas;
       });
     });
-
-    Module.getDisciplinas(context, true).then((disciplinasFavoritas) {
-      setState(() {
-        _isLoadDisciplinasFavoritas = false;
-        _disciplinasFavoritas = disciplinasFavoritas;
-      });
-    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 2,
-      child: Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          actions: <Widget>[
-            _userData != null
-            ? (_userData.isMonitor ? _isMonitorFlag() : null)
-            : null
-          ],
-          iconTheme: new IconThemeData(color: Colors.white), //cor do menu
-          backgroundColor: ColorTheme.primaryColor,
-          bottom: TabBar(
-              unselectedLabelColor: ColorTheme
-                  .textUnselectedColor, //Cor do texto TabBar sem seleção
-              labelColor: Colors.white, //Cor do texto TabBar com seleção
-              indicatorColor: Colors.white, // Cor da tab selecionada
-              labelStyle: TextStyle(
-                color: Colors.white,
-              ),
-              tabs: [
-                Tab(text: "FAVORITOS"),
-                Tab(text: "DISCIPLINAS"),
-              ]),
-        ),
+    return Scaffold(
+        key: _drawerKey,
         drawer: DrawerList(_userData),
-        body: TabBarView(children: [_bodyFavoritos(context), _body(context)]),
-        floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-        bottomNavigationBar: new BottomAppBar(
-          color: Colors.white,
+        body: new Stack(
+        children: <Widget>[
+            Container(height: _headerLength, 
+              child: _buildTitle()
+            ),
+            _buildTopHeader(context),
+            _body(context)
+          ],
         ),
+      );
+  }
+
+  // Retorna o cabeçalho
+  Widget _buildTopHeader(context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 32.0),
+      child: Row(
+        children: <Widget>[
+          IconButton(icon: Icon(Icons.menu, size: 32.0, color: Colors.white), 
+            onPressed: (){
+               _drawerKey.currentState.openDrawer();
+            }
+          ),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.only(right: 8),
+              child: Text(
+                _userData.nome,
+                textAlign: TextAlign.right,
+                style: TextStyle(
+                    fontSize: 16.0,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w300),
+              ),
+            ),
+          ),           
+          CircleAvatar(
+            minRadius: 15.0,
+            maxRadius: 15.0,
+            backgroundImage: new AssetImage('assets/images/user.png'),
+          ),       
+         ],
       ),
     );
   }
 
+  // Retorna o título da página
+  Widget _buildTitle() {
+    return Padding(
+      padding: EdgeInsets.only(left: 16.0, top: _headerLength / 1.8),
+      child: Center(
+        child: Text(
+          'Disciplinas',
+          textAlign: TextAlign.center,
+          style: new TextStyle(
+              fontSize: 26.0,
+              color: Colors.white,
+              fontWeight: FontWeight.w300),
+        ),)
+    );
+  }
+  
   // Retorna um campo de busca
-  Widget _searchBox() {
+  Widget _searchAndFilterBox() {
     return Container(
         decoration: BoxDecoration(
           color: ColorTheme.backgroundNeutroColor,
         ),
-        child: SearchBox(() {
-          setState(() {
-            _disciplinasFiltered = _disciplinas;
-          });
-        }, (String value) {
-          List<Disciplina> result = _filterDisciplinas(value);
-          setState(() {
-            _disciplinasFiltered = result;
-          });
-        }, "Procure uma disciplina..."),
+        child: Row(children: [
+          Flexible(child: 
+            SearchBox(() {
+                setState(() {
+                  _disciplinasFiltered = _disciplinas;
+                });
+              }, (String value) {
+                List<Disciplina> result = _filterDisciplinas(value);
+                setState(() {
+                  _disciplinasFiltered = result;
+                });
+              }, "Procure uma disciplina...")
+          ),
+          PopupMenuButton(
+            icon: Icon(Icons.filter_list, color: Colors.black),
+            onSelected: (value) {
+              List<Disciplina> result = filterDisciplinasByFavorito(value);
+              setState(() {
+                _disciplinasFiltered = result;
+              });
+            },
+            itemBuilder: (context) {
+              return [
+                _popupItem(1, Icon(Icons.star, color: Colors.black, size: 18), "Favoritas"),
+                _popupItem(0, Icon(Icons.select_all, color: Colors.black, size: 18), "Todas"),
+              ];
+          },)         
+          ]),
     );
   }
 
+  // Item do menu popup
+  PopupMenuItem _popupItem(value, Icon icon, String text) {
+    return PopupMenuItem(
+      value: value,
+      child: 
+      RichText(
+          text: TextSpan(
+            children: [
+              WidgetSpan(
+                child: Padding(padding: EdgeInsets.only(right: 5), child: icon),
+              ),
+              TextSpan(
+                text: text,
+                style: TextStyle(color: Colors.black)
+              ),
+            ],
+          ),
+        )
+    );
+  }
+
+  // Loading
+  Widget _buildWaitingWidget() {
+    return Padding(
+      padding: EdgeInsets.only(top: _headerLength),
+      child: Container(
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          color: ColorTheme.backgroundNeutroColor,
+        ),
+        child: CircularProgressIndicator(),
+      )
+    );
+  }
+
+  // Cards de disciplinas
+  Widget _body(context) {
+    return _isLoadDisciplinas
+        ? _buildWaitingWidget()
+        : Padding(
+            padding: EdgeInsets.only(top: _headerLength), child: 
+            Column(          
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                _searchAndFilterBox(),
+                Expanded(
+                    child: Container(
+                        decoration: BoxDecoration(
+                          color: ColorTheme.backgroundNeutroColor,
+                        ),
+                        child: GridView.builder(
+                          primary: false,
+                          padding: const EdgeInsets.all(10),
+                          itemCount: _disciplinasFiltered.length,
+                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisSpacing: 10,
+                            mainAxisSpacing: 10,
+                            crossAxisCount: 2,
+                            childAspectRatio: 2,
+                          ),
+                          itemBuilder: (BuildContext context, int index) {
+                            return CardDisciplina(_disciplinasFiltered[index]);
+                          },
+                        )))
+              ],
+            )
+          );
+  }
+
+  //### Consultas
   // Realiza uma busca sobre a lista de perguntas
   List<Disciplina> _filterDisciplinas(String value) {
     List<Disciplina> filterList = new List<Disciplina>();
@@ -112,91 +224,21 @@ class _HomePageState extends State<HomePage> {
     return filterList;
   }
 
-  // Loading
-  _buildWaitingWidget() {
-    return Container(
-      alignment: Alignment.center,
-      decoration: BoxDecoration(
-        color: ColorTheme.backgroundNeutroColor,
-      ),
-      child: CircularProgressIndicator(),
-    );
+  // Filtra as disciplinas por favorito ou não
+  List<Disciplina> filterDisciplinasByFavorito(value) {
+    List<Disciplina> filterList = new List<Disciplina>();
+
+    if(value == 1) {      
+      _disciplinas.forEach((p) {
+        if (p.favorita) filterList.add(p);
+      });
+    }
+    else {         
+      _disciplinas.forEach((p) {
+        filterList.add(p);
+      });
+    }
+    return filterList;
   }
 
-  // Cards de disciplinas
-  _body(context) {
-    return _isLoadDisciplinas
-        ? _buildWaitingWidget()
-        : Column(
-            children: <Widget>[
-              _searchBox(),
-              Expanded(
-                  child: Container(
-                      decoration: BoxDecoration(
-                        color: ColorTheme.backgroundNeutroColor,
-                      ),
-                      child: GridView.builder(
-                        primary: false,
-                        padding: const EdgeInsets.all(10),
-                        itemCount: _disciplinasFiltered.length,
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisSpacing: 10,
-                          mainAxisSpacing: 10,
-                          crossAxisCount: 2,
-                          childAspectRatio: 2,
-                        ),
-                        itemBuilder: (BuildContext context, int index) {
-                          return CardDisciplina(_disciplinasFiltered[index], false);
-                        },
-                      )))
-            ],
-          );
-  }
-
-  // Cards de disciplinas favoritas
-  _bodyFavoritos(context) {
-    return _isLoadDisciplinasFavoritas
-        ? _buildWaitingWidget()
-        : Container(
-            child: Container(
-                decoration: BoxDecoration(
-                  color: ColorTheme.backgroundNeutroColor,
-                ),
-                child: GridView.builder(
-                  primary: false,
-                  padding: const EdgeInsets.all(10),
-                  itemCount: _disciplinasFavoritas.length,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisSpacing: 10,
-                    mainAxisSpacing: 10,
-                    crossAxisCount: 2,
-                    childAspectRatio: 2,
-                  ),
-                  itemBuilder: (BuildContext context, int index) {
-                    return CardDisciplina(_disciplinasFavoritas[index], true);
-                  },
-                )));
-  }
-
-  // Flag que descreve que o aluno é um monitor
-  _isMonitorFlag() {
-    return Center(
-      // icon: Icon(Icons.star),
-      child: Padding(
-        padding: EdgeInsets.only(right: 10),
-        child: RichText(
-          text: TextSpan(
-            children: [
-              WidgetSpan(
-                child: Icon(Icons.star, size: 16),
-              ),
-              TextSpan(
-                text: " Monitor",
-              ),
-            ],
-          ),
-        )
-      )
-    );
-  }
 }

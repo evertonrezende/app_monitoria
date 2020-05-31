@@ -1,23 +1,19 @@
 import 'package:app_distribuida2/models/disciplina.model.dart';
 import 'package:app_distribuida2/providers/api.provider.dart';
 import 'package:app_distribuida2/models/apiResponse.model.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+import 'package:sqflite/sqflite.dart';
+
 
 class DisciplinaApi extends ApiProvider {
 
   // Retorna as disciplinas cadastradas no sistema
   static Future<ApiResponse<List<Disciplina>>> getDisciplinas() async {
-    //Tratamento de exceção em caso de indisponibilidades da rede
     try {
-      var response = await http.get(
-        "${ApiProvider.API_URL}/Disciplinas",
-        headers: ApiProvider.createHeaderSync());
+      Database db = await ApiProvider.getDatabase();
+      List<Map> mapResponse = await db.query('disciplinas');
 
       //Recebe a string no formato json e transforma no formato Map
-      List mapResponse = json.decode(response.body);
-
-      if (response.statusCode == 200) {
+      if(mapResponse.length > 0) {      
         final disciplinas = mapResponse.map((m) => Disciplina.fromJson(m)).toList();
         return ApiResponse.ok(disciplinas);
       }
@@ -26,7 +22,6 @@ class DisciplinaApi extends ApiProvider {
       return ApiResponse.error("Não foi possível recuperar as disciplinas");
     } 
     catch (error) {
-      //Esse tratamento é uma mensagem genérica em caso de perda de conexão, problema do webservice, etc...
       return ApiResponse.error("Não foi possível recuperar as disciplinas");
     }
   }
