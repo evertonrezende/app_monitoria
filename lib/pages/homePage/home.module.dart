@@ -9,7 +9,7 @@ Future<List<Disciplina>> getDisciplinas(context, [favoritas = false]) async {
 
   if (!response.ok) {
     alert(context, "Ops!", response.msg);
-    return null;
+    return [];
   }
 
   return response.result;

@@ -28,8 +28,7 @@ class DuvidaApi extends ApiProvider {
 
   // Salva uma dúvida
   static Future<ApiResponse<dynamic>> postDuvida(String assunto, int id_materia) async {   
-    try { 
-      
+    try {       
       Usuario user = await AppStorage.getCurrentUser();
       Database db = await ApiProvider.getDatabase();
       Duvida d = new Duvida(user.id, id_materia, assunto, null, null);
