@@ -1,0 +1,7 @@
+include: package:pedantic/analysis_options.yaml
+
+linter:
+  rules:
+    curly_braces_in_flow_control_structures: false
+    library_prefixes: false
+    unnecessary_new: false

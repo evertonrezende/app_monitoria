@@ -9,7 +9,7 @@ Future<List<Duvida>> getDuvidas(context) async {
 
   if (!response.ok) {
     alert(context, "Ops!", response.msg);
-    return null;
+    return [];
   }
 
   return response.result;

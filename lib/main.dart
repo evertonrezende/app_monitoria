@@ -15,6 +15,9 @@ class MyApp extends StatelessWidget {
         primaryColor: Colors.grey[400],
         brightness: Brightness.light,
         scaffoldBackgroundColor: ColorTheme.primaryColor,
+        textTheme: TextTheme(
+          headline6: TextStyle(color: Colors.white)
+        ),
         canvasColor: ColorTheme.secondaryColor,
         iconTheme: IconThemeData(
           color: Colors.white,

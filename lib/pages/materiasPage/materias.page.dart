@@ -38,7 +38,7 @@ class _MateriasPageState extends State<MateriasPage> {
           icon: new Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () => popPage(context),
         ),
-        title: Text(widget._disciplina.nome),
+        title: Text(widget._disciplina.nome, style: Theme.of(context).textTheme.headline6)
       ),
       body: _body(context),
     );

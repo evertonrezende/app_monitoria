@@ -27,7 +27,7 @@ class SubmitButton extends StatelessWidget {
                 _text,
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: 22,
+                  fontSize: 18,
                 ),
               ),
         onPressed: showProgress? null : _onPressed,

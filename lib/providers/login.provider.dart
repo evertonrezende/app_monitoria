@@ -13,7 +13,7 @@ class LoginApi extends ApiProvider {
         where: 'login = ? AND senha = ?', whereArgs: [login, senha], limit: 1);
 
       //Recebe a string no formato json e transforma no formato Map
-      if(mapResponse.length > 0) {      
+      if(mapResponse.isNotEmpty) {      
         final user = Usuario.fromJson(mapResponse.first);
         return ApiResponse.ok(user);
       }

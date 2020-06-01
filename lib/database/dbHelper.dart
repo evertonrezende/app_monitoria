@@ -19,6 +19,7 @@ class DbHelper {
    }
 
   Future<Database> get database async {
+    _database = null; // TEMP
     if (_database == null) {
       _database = await _initDatabase();
     }
@@ -29,19 +30,20 @@ class DbHelper {
     Directory directory = await getApplicationDocumentsDirectory();
     String path = directory.path + 'monitoria.db';
 
-    await deleteDatabase(path);
+    await deleteDatabase(path); // TEMP
     return await openDatabase(path, version: 1,
         onCreate: (Database db, int version) async {
           await Seeders.createUsuarios(db);
           await Seeders.createDisciplinas(db);
           await Seeders.createMaterias(db);
           await Seeders.createTopicos(db);
+          await Seeders.createDuvidas(db);
         }
     );
   }
 
   Future close() async {
     Database db = await this.database;
-    db.close(); 
+    await db.close(); 
   }
 }

@@ -20,11 +20,8 @@ class CardDisciplina extends StatelessWidget {
             color: ColorTheme.secondaryColor,
             borderRadius: BorderRadius.circular(10),
           ),
-          padding: _disciplina.favorita
-              ? const EdgeInsets.only(top: 2, right: 2)
-              : const EdgeInsets.all(8),
+          padding: EdgeInsets.symmetric(horizontal: 2, vertical: 2),
           child: _getContent(_disciplina.favorita),
-          alignment: Alignment.center,
         ));
   }
 
@@ -36,17 +33,19 @@ class CardDisciplina extends StatelessWidget {
           alignment: Alignment.topRight,
           child: Icon(
             favorita? Icons.star : Icons.star_border,
+            size: 18,
             color: Colors.yellowAccent,
           ),
         ),
         Container(
+          alignment: Alignment.centerLeft,
           padding: const EdgeInsets.only(bottom: 8, left: 5, right: 5),
-          alignment: Alignment.center,
           child: Text(
             _disciplina.nome,
+            textAlign: TextAlign.left,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
-            style: TextStyle(fontSize: 14),
+            style: TextStyle(fontSize: 14, fontWeight: FontWeight.w300),
           ),
         ),
       ],

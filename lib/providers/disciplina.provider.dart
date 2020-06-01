@@ -13,7 +13,7 @@ class DisciplinaApi extends ApiProvider {
       List<Map> mapResponse = await db.query('disciplinas');
 
       //Recebe a string no formato json e transforma no formato Map
-      if(mapResponse.length > 0) {      
+      if(mapResponse.isNotEmpty) {      
         final disciplinas = mapResponse.map((m) => Disciplina.fromJson(m)).toList();
         return ApiResponse.ok(disciplinas);
       }

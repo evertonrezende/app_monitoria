@@ -38,7 +38,7 @@ class _SearchBoxState extends State<SearchBox> {
                 ),
                 hintText: widget.label,
                 hintStyle: TextStyle(color: Colors.grey),
-                suffixIcon: _controller.text.length > 0? IconButton(
+                suffixIcon: _controller.text.isNotEmpty? IconButton(
                   focusColor: Colors.red,
                   icon: Icon(Icons.cancel),
                   onPressed: () {

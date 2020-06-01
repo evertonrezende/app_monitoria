@@ -1,3 +1,5 @@
+import 'package:app_distribuida2/pages/duvidasPage/duvidas.page.dart';
+import 'package:app_distribuida2/pages/novaPerguntaPage/novaPergunta.page.dart';
 import 'package:app_distribuida2/utils/appStorage.dart';
 import 'package:app_distribuida2/widgets/cardDisciplina.widget.dart';
 import 'package:app_distribuida2/widgets/drawerList.widget.dart';
@@ -19,6 +21,7 @@ class _HomePageState extends State<HomePage> {
   List<Disciplina> _disciplinasFiltered = new List<Disciplina>();
   bool _isLoadDisciplinas = true;
   Usuario _userData;
+  int _currentIndex = 0;
 
   final double _headerLength = 150;
 
@@ -50,11 +53,29 @@ class _HomePageState extends State<HomePage> {
             Container(height: _headerLength, 
               child: _buildTitle()
             ),
+            Padding(
+              padding: EdgeInsets.only(top: _headerLength),
+              child: _getBody(),
+            ),
             _buildTopHeader(context),
-            _body(context)
           ],
         ),
+        bottomNavigationBar: _buildBottomNavbar(),
+        extendBodyBehindAppBar: true,
+        extendBody: true,
       );
+  }
+
+  // Pega o corpo da página de acordo com a NavBar
+  Widget _getBody() {
+    switch(_currentIndex) {
+      case 0:
+        return _bodyDisciplina(context);
+      case 1:
+        return NovaPerguntaPage();
+      default:
+        return DuvidasPage();
+    }
   }
 
   // Retorna o cabeçalho
@@ -93,11 +114,17 @@ class _HomePageState extends State<HomePage> {
 
   // Retorna o título da página
   Widget _buildTitle() {
+    String title = 'Disciplinas';
+    if(_currentIndex == 1)
+      title = 'Nova Pergunta';
+    else if (_currentIndex == 2)
+      title = 'Minhas Dúvidas';
+
     return Padding(
       padding: EdgeInsets.only(left: 16.0, top: _headerLength / 1.8),
       child: Center(
         child: Text(
-          'Disciplinas',
+          title,
           textAlign: TextAlign.center,
           style: new TextStyle(
               fontSize: 26.0,
@@ -107,6 +134,38 @@ class _HomePageState extends State<HomePage> {
     );
   }
   
+  // Barra de navegação
+  Widget _buildBottomNavbar() {
+    return BottomNavigationBar(      
+        backgroundColor: Colors.black.withOpacity(0.5),
+        selectedItemColor: ColorTheme.secondaryColor,
+        unselectedItemColor: Colors.white,
+        currentIndex: _currentIndex,
+        onTap: (int index) {
+          setState(() {
+            _currentIndex = index;
+          });
+        },
+        items:[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.book),
+            // backgroundColor: Colors.red,
+            title: Text("Home")
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.chat_bubble_outline),
+            // backgroundColor: destination.color,
+            title: Text("Nova Pergunta")
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.question_answer),
+            // backgroundColor: destination.color,
+            title: Text("Minhas Dúvidas")
+          )
+        ]
+    );
+  }
+
   // Retorna um campo de busca
   Widget _searchAndFilterBox() {
     return Container(
@@ -167,25 +226,20 @@ class _HomePageState extends State<HomePage> {
 
   // Loading
   Widget _buildWaitingWidget() {
-    return Padding(
-      padding: EdgeInsets.only(top: _headerLength),
-      child: Container(
+    return Container(
         alignment: Alignment.center,
         decoration: BoxDecoration(
           color: ColorTheme.backgroundNeutroColor,
         ),
         child: CircularProgressIndicator(),
-      )
-    );
+      );
   }
 
   // Cards de disciplinas
-  Widget _body(context) {
+  Widget _bodyDisciplina(context) {
     return _isLoadDisciplinas
         ? _buildWaitingWidget()
-        : Padding(
-            padding: EdgeInsets.only(top: _headerLength), child: 
-            Column(          
+        : Column(          
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 _searchAndFilterBox(),
@@ -209,8 +263,7 @@ class _HomePageState extends State<HomePage> {
                           },
                         )))
               ],
-            )
-          );
+            );
   }
 
   //### Consultas

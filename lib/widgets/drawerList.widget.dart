@@ -14,33 +14,31 @@ class DrawerList extends StatelessWidget {
     return Drawer(
         child: ListView(
       children: <Widget>[
-        _createOption("Olá ${_usuario?.nome}", () {
+        _createOption("Olá, ${_usuario?.nome}.", () {
           popPage(context);
-        }),
+        }, style: TextStyle(fontSize: 20, fontWeight: FontWeight.w300) ),
         Divider(),
-        _createOption("MINHAS DÚVIDAS", () {
-          popPage(context);
-        }, Icon(Icons.help)),
         _createOption("MONITORES", () {
           pushPage(context, '/home/monitores');
-        }, Icon(Icons.people)),
+        }, icon: Icon(Icons.people)),
         if(_usuario != null && _usuario.isMonitor) _createOption("MÉTRICAS", () {
           pushPage(context, '/home/metricas');
-        }, Icon(Icons.multiline_chart)),
+        }, icon: Icon(Icons.multiline_chart)),
         Divider(),
         _createOption("SAIR", () {
           _onClickLogout(context);
-        }, Icon(Icons.exit_to_app))
+        }, icon: Icon(Icons.exit_to_app))
       ],
     ));
   }
 
   // Retorna um item do menu formatado
-  ListTile _createOption(text, Function work, [Icon icon]) {
+  ListTile _createOption(text, Function work, {Icon icon, TextStyle style}) {
     return ListTile(
       leading: icon,
       title: Text(
         text,
+        style: style,
       ),
       onTap: () {
         work();

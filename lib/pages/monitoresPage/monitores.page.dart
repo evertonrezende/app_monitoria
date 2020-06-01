@@ -15,7 +15,7 @@ class MonitoresPage extends StatelessWidget {
           icon: new Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () => Navigator.of(context).pop(),
         ),
-        title: Text("Monitores"),
+        title: Text('Monitores', style: Theme.of(context).textTheme.headline6)
       ),
       body: _body(context),
     );

@@ -33,8 +33,9 @@ class _PerguntasFrequentes extends State<PerguntasFrequentesPage> {
             leading: new IconButton(
               icon: new Icon(Icons.arrow_back, color: Colors.white),
               onPressed: () => popPage(context),
-            ),
-            title: Text('Perguntas Frequentes')),
+            ),            
+            title: Text('Perguntas Frequentes', style: Theme.of(context).textTheme.headline6)
+        ),
         body: Container(
             color: Colors.lightBlue[50],
             padding: EdgeInsets.all(10.0),

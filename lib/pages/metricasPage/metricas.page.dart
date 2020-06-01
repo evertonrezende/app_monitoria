@@ -45,8 +45,8 @@ class _MetricasPageState extends State<MetricasPage> {
         leading: new IconButton(
           icon: new Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () => Navigator.of(context).pop(),
-        ),
-        title: Text("Métricas"),
+        ),        
+        title: Text('Métricas', style: Theme.of(context).textTheme.headline6)
       ),
       body: _body(),
     );

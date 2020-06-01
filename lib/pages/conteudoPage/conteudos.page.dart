@@ -25,8 +25,8 @@ class ConteudosPage extends StatelessWidget {
           }
 
           return Scaffold(
-              appBar: AppBar(
-                title: Text(_materia.nome),
+              appBar: AppBar(                
+                title: Text(_materia.nome, style: Theme.of(context).textTheme.headline6),
                 centerTitle: true,
                 backgroundColor: ColorTheme.primaryColor,
                 leading: new IconButton(
@@ -121,7 +121,7 @@ class ConteudosPage extends StatelessWidget {
         }
         else if (choice == Opcoes.duvidas) {
           print("Clicou em duvidas");
-          pushPage(context, '/home/disciplina/materias/duvidas');
+          // pushPage(context, '/home/disciplina/materias/duvidas');
         }
       },
       itemBuilder: (BuildContext context) {
