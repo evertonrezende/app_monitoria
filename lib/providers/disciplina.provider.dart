@@ -25,4 +25,20 @@ class DisciplinaApi extends ApiProvider {
       return ApiResponse.error("Não foi possível recuperar as disciplinas");
     }
   }
+
+  
+  // Retorna as disciplinas cadastradas no sistema
+  static Future<ApiResponse<dynamic>> setDisciplinaFavorita(int id_disciplina, bool favorita) async {
+    try {
+      Database db = await ApiProvider.getDatabase();
+      Map<String, bool> values = {"favorita": favorita};
+      await db.update('disciplinas', values, where: "id = ?", whereArgs: [id_disciplina]);
+
+      
+      return ApiResponse.ok(true);
+    } 
+    catch (error) {
+      return ApiResponse.error("Não foi possível marcar a disciplina como favorita");
+    }
+  }
 }

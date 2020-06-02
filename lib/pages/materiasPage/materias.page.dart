@@ -31,6 +31,10 @@ class _MateriasPageState extends State<MateriasPage> {
               onPressed: () {
                 setState(() {
                   _disciplina.favorita = !_disciplina.favorita;
+                  Module.setDisciplinaFavorita(context, _disciplina.id, _disciplina.favorita)
+                    .catchError((e) => 
+                      _disciplina.favorita = !_disciplina.favorita
+                    );
                 });
               }),
         ],

@@ -1,5 +1,5 @@
 import 'package:app_distribuida2/pages/perguntasFrequentesPage/perguntasFrequentes.page.dart';
-import 'package:app_distribuida2/pages/conteudoPage/conteudos.page.dart';
+import 'package:app_distribuida2/pages/conteudosPage/conteudos.page.dart';
 import 'package:app_distribuida2/pages/materiasPage/materias.page.dart';
 import 'package:app_distribuida2/pages/metricasPage/metricas.page.dart';
 import 'package:app_distribuida2/pages/monitoresPage/monitores.page.dart';
