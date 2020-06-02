@@ -60,52 +60,8 @@ class ConteudosPage extends StatelessWidget {
                 title: Text("${_materia.nome}"),
                 subtitle: Text("\nId do Conteúdo: $id " + "\nDescrição do conteudo: $nome"),
                 onTap: () {
-                  alertConfirm(context, "Deseja abrir o tópico \"$id'\"?", () {
-                    popPage(context);
-                  }, Icons.class_);
+                  pushPage(context, '/home/disciplina/materias/conteudo/topico');
                 }),
-            ButtonBar(
-              children: <Widget>[
-                FittedBox(
-                  child: FloatingActionButton.extended(
-                    heroTag: null, 
-                    elevation: 10.0,
-                    backgroundColor: ColorTheme.secondaryColor,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(20.0))),
-                    icon: Icon(Icons.favorite, size: 15.0),
-                    splashColor: Colors.greenAccent,
-                    hoverColor: Colors.greenAccent,
-                    label: Text(
-                      'Útil',
-                      style: TextStyle(fontSize: 12.0),
-                    ),
-                    onPressed: () {
-                      print('Clicou em útil');
-                    },
-                  ),
-                ),
-                FittedBox(
-                  child: FloatingActionButton.extended(
-                    heroTag: null,
-                    elevation: 10.0,
-                    backgroundColor: ColorTheme.secondaryColor,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(20.0))),
-                    icon: Icon(Icons.favorite_border, size: 15.0),
-                    splashColor: Colors.redAccent,
-                    hoverColor: Colors.redAccent,
-                    label: Text(
-                      'Não Útil',
-                      style: TextStyle(fontSize: 12.0),
-                    ),
-                    onPressed: () {
-                      print('Clicou em não útil');
-                    },
-                  ),
-                )
-              ],
-            )
           ],
         ),
       ),

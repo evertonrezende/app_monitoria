@@ -1,3 +1,4 @@
+import 'package:app_distribuida2/pages/lerConteudoPage/lerConteudo.page.dart';
 import 'package:app_distribuida2/pages/perguntasFrequentesPage/perguntasFrequentes.page.dart';
 import 'package:app_distribuida2/pages/conteudosPage/conteudos.page.dart';
 import 'package:app_distribuida2/pages/materiasPage/materias.page.dart';
@@ -26,6 +27,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => MateriasPage(settings.arguments));
     case '/home/disciplina/materias/conteudo':
       return MaterialPageRoute(builder: (context) => ConteudosPage(settings.arguments));
+    case '/home/disciplina/materias/conteudo/topico':
+      return MaterialPageRoute(builder: (context) => LerConteudoPage(settings.arguments));
     case '/home/disciplina/materias/perguntas-frequentes':
       return MaterialPageRoute(builder: (context) => PerguntasFrequentesPage()); 
     default:
