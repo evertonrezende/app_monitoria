@@ -183,10 +183,12 @@ class Seeders {
       
       var d1 = new Duvida(1, 1, "O que é uma lista?", _getLoremIpsumText(), null);
       var d2 = new Duvida(1, 7, "Como resolvo uma derivada de função potência?", _getLoremIpsumText(), null);
-      var d3 = new Duvida(2, 7, "Por que quando altero meu objeto pilha também altero a cópia dele?", null, null);
+      var d3 = new Duvida(1, 2, "Por que quando altero meu objeto pilha também altero a cópia dele?", null, null);
+      var d4 = new Duvida(2, 2, "Como inverter uma pilha?", null, null);
       await db.insert('duvidas', d1.toJson());
       await db.insert('duvidas', d2.toJson());
       await db.insert('duvidas', d3.toJson());
+      await db.insert('duvidas', d4.toJson());
   }  
 
   // Retorna texto 'lorem ispum dolor sit amet'

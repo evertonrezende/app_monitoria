@@ -11,14 +11,15 @@ class DuvidaApi extends ApiProvider {
   // Retorna as dúvidas cadastradas no sistema
   static Future<ApiResponse<List<Duvida>>> getDuvidas() async {
     try {
+      Usuario user = await AppStorage.getCurrentUser();
       Database db = await ApiProvider.getDatabase();
-      List<Map> mapResponse = await db.query('duvidas');
+      List<Map> mapResponse = await db.query('duvidas', where: "id_aluno = ?", whereArgs: [user.id]);
 
       if(mapResponse.isNotEmpty) {     
         List<Duvida> duvidas = new List<Duvida>();
         for(int i = 0; i < mapResponse.length; i++){
           Duvida d = Duvida.fromJson(mapResponse[i]);
-          d.materia = (await MateriaApi.getMateria(d.id)).result;
+          d.materia = (await MateriaApi.getMateria(d.id_materia)).result;
 
           duvidas.add(d);
         }
