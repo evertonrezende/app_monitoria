@@ -62,7 +62,7 @@ class _HomePageState extends State<HomePage> {
         ),
         bottomNavigationBar: _buildBottomNavbar(),
         extendBodyBehindAppBar: true,
-        extendBody: true,
+        extendBody: true
       );
   }
 
@@ -93,7 +93,7 @@ class _HomePageState extends State<HomePage> {
             child: Padding(
               padding: const EdgeInsets.only(right: 8),
               child: Text(
-                _userData.nome,
+                _userData != null? _userData.nome : "",
                 textAlign: TextAlign.right,
                 style: TextStyle(
                     fontSize: 16.0,
@@ -250,7 +250,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                         child: GridView.builder(
                           primary: false,
-                          padding: const EdgeInsets.all(10),
+                          padding: const EdgeInsets.only(right: 10, left: 10, bottom: 60),
                           itemCount: _disciplinasFiltered.length,
                           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisSpacing: 10,
@@ -260,7 +260,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                           itemBuilder: (BuildContext context, int index) {
                             return CardDisciplina(_disciplinasFiltered[index]);
-                          },
+                          }
                         )))
               ],
             );

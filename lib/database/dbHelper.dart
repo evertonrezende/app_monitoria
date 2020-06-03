@@ -36,7 +36,7 @@ class DbHelper {
           await Seeders.createUsuarios(db);
           await Seeders.createDisciplinas(db);
           await Seeders.createMaterias(db);
-          await Seeders.createTopicos(db);
+          await Seeders.createConteudos(db);
           await Seeders.createDuvidas(db);
         }
     );

@@ -4,17 +4,20 @@ import 'package:app_distribuida2/utils/navigator.dart';
 import 'package:app_distribuida2/widgets/diagonalClipper.widget.dart';
 import 'package:flutter/material.dart';
 
-class LerConteudoPage extends StatefulWidget {
-  Conteudo _conteudo;
+class ConteudoPage extends StatefulWidget {
+  final Conteudo _conteudo;
 
-  LerConteudoPage(this._conteudo);
+  ConteudoPage(this._conteudo);
 
   @override
-  _LerConteudoPageState createState() => _LerConteudoPageState();
+  _ConteudoPageState createState() => _ConteudoPageState(_conteudo);
 }
 
-class _LerConteudoPageState extends State<LerConteudoPage> {
+class _ConteudoPageState extends State<ConteudoPage> {
+  Conteudo _conteudo;
   final double _imageHeight = 256.0;
+  
+  _ConteudoPageState(this._conteudo);
 
   @override
   Widget build(BuildContext context) {
@@ -54,16 +57,16 @@ class _LerConteudoPageState extends State<LerConteudoPage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
-            ('Ryan Barnes Um itida dashbda da ashu').length > 35
-                ? ('Ryan Barnes Um itida dashbda da ashu').substring(0, 35)
-                : ('Ryan Barnes Um itida dashbda da ashu'),
+            (_conteudo.assunto).length > 40
+                ? (_conteudo.assunto).substring(0, 40) + "..."
+                : (_conteudo.assunto),                
             style: TextStyle(
-                fontSize: 26.0,
+                fontSize: 22.0,
                 color: Colors.white,
                 fontWeight: FontWeight.w400),
           ),
           Padding(
-            padding: EdgeInsets.symmetric(vertical: 30),
+            padding: EdgeInsets.symmetric(vertical: 35),
           ),
           Expanded( child: _buildTextScroll()),
         ],
@@ -73,9 +76,18 @@ class _LerConteudoPageState extends State<LerConteudoPage> {
 
   Widget _buildTextScroll() {
     return SingleChildScrollView(child: 
-        Column(children: <Widget>[
+        Column(          
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
             Text(
-              'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce et sollicitudin est. Suspendisse posuere nisl eu condimentum lacinia. Nam velit ligula, vulputate scelerisque imperdiet et, euismod ac metus. Donec eget aliquam ligula, sit amet convallis nisi. Aliquam sed congue tortor. Aliquam mattis, dolor at sagittis cursus, neque lacus iaculis turpis, id mattis nisl libero eu risus. Maecenas eu rhoncus turpis. Donec faucibus, erat vitae pulvinar ullamcorper, leo elit fringilla mi, quis maximus eros urna at sapien. Duis at risus ut quam pulvinar pharetra. Nullam vestibulum sit amet lacus vitae mollis. Aliquam sed congue tortor. Aliquam mattis, dolor at sagittis cursus, neque lacus iaculis turpis, id mattis nisl libero eu risus. Maecenas eu rhoncus turpis. Donec faucibus, erat vitae pulvinar ullamcorper, leo elit fringilla mi, quis maximus eros urna at sapien. Duis at risus ut quam pulvinar pharetra. Nullam vestibulum sit amet lacus vitae mollis.',
+              _conteudo.assunto, 
+              style: TextStyle(
+                fontSize: 12.0,
+                fontWeight: FontWeight.w400)       
+            ),
+            Padding(padding: EdgeInsets.symmetric(vertical: 5)),
+            Text(
+              _conteudo.texto,
               textAlign: TextAlign.justify,
               style: TextStyle(
                   fontSize: 16.0,
@@ -83,14 +95,16 @@ class _LerConteudoPageState extends State<LerConteudoPage> {
                   fontWeight: FontWeight.w300),
             ),
             Divider(),
-            Padding(padding: EdgeInsets.only(top: 20),child: Text("Esse artigo foi útil?")),
+            Padding(padding: EdgeInsets.only(top: 20),
+              child: Text("Esse artigo foi útil?")
+            ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[ 
-                  _buildReactButtons(Icons.thumb_up, "Útil"),
-                  _buildReactButtons(Icons.thumb_down, "Não Útil"),
+                  _buildReactButtons(Icons.thumb_up, "Útil", _conteudo.likes),
+                  _buildReactButtons(Icons.thumb_down, "Não Útil", _conteudo.deslikes),
                 ],
               )
             )
@@ -99,18 +113,23 @@ class _LerConteudoPageState extends State<LerConteudoPage> {
     );
   }
 
-  Widget _buildReactButtons(IconData icon, String text) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
+  Widget _buildReactButtons(IconData icon, String text, int contador) {
+    return Column(
       children: <Widget>[
-        IconButton(
-          color: ColorTheme.primaryColor,
-          icon: Icon(icon),
-          onPressed: () {
-          },
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            IconButton(
+              color: ColorTheme.primaryColor,
+              icon: Icon(icon),
+              onPressed: () {
+              },
+            ),
+            Text(contador.toString())
+          ],
         ),
-        Text(text)
-      ],
+        Text(text, style: TextStyle(fontWeight: FontWeight.w500))
+      ]
     );
   }
 }

@@ -2,6 +2,7 @@ import 'package:app_distribuida2/models/disciplina.model.dart';
 import 'package:app_distribuida2/models/materia.model.dart';
 import 'package:app_distribuida2/theme/colors.theme.dart';
 import 'package:app_distribuida2/utils/navigator.dart';
+import 'package:app_distribuida2/widgets/colapsedList.widget.dart';
 import 'package:flutter/material.dart';
 import './materias.module.dart' as Module;
 
@@ -15,6 +16,7 @@ class MateriasPage extends StatefulWidget {
 
 class _MateriasPageState extends State<MateriasPage> {
   Disciplina _disciplina;
+  bool _isLoading = true;
 
   _MateriasPageState(this._disciplina);
 
@@ -44,37 +46,84 @@ class _MateriasPageState extends State<MateriasPage> {
         ),
         title: Text(widget._disciplina.nome, style: Theme.of(context).textTheme.headline6)
       ),
-      body: _body(context),
+      backgroundColor: ColorTheme.backgroundNeutroColor,
+      body: _body(context)
     );
   }
+  
+  // Loading
+  Widget _buildWaitingWidget() {
+    return Container(
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          color: ColorTheme.backgroundNeutroColor,
+        ),
+        child: CircularProgressIndicator(),
+      );
+  }
 
+  // Lista de matérias
   _body(context) {
     return FutureBuilder(
-      future: Module.getMaterias(context, widget._disciplina.id),
+      future: Module.getMaterias(context, widget._disciplina.id)
+                    .whenComplete(() => _isLoading = false),
       builder: (context, AsyncSnapshot<List<Materia>> snapshot) {
         List<Widget> materiasCard = new List<Widget>();
         if (snapshot.hasData)
           snapshot.data
-              .forEach((m) => materiasCard.add(_cardMateria(context, m)));
-
-        return Container(
-          color: ColorTheme.backgroundNeutroColor,
-          child: ListView(
-            children: materiasCard,
-          ),
-        );
+              .forEach((m) => materiasCard.add(_buildColapsedList(context, m)));
+          
+        return _isLoading? _buildWaitingWidget() :
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: <Widget>[  
+                  FlatButton(
+                    highlightColor: Colors.transparent,
+                    onPressed: () {
+                      pushPage(context, '/home/disciplina/materias/perguntas-frequentes');
+                    },
+                    child: Text(
+                      "Perguntas Frequentes ...",
+                      style: TextStyle(
+                        color: ColorTheme.primaryColor,
+                        decoration: TextDecoration.underline
+                      )
+                    ),
+                  ),    
+                  Expanded(child: ListView(
+                    children: materiasCard,
+                  ))
+                ]
+              );
       },
     );
   }
 
-  _cardMateria(context, Materia materia) {
-    return ListTile(
-        leading: Icon(Icons.description),
-        title: Text(materia.nome),
-        trailing: Icon(Icons.keyboard_arrow_right),
-        onTap: () {
-          pushPage(context, '/home/disciplina/materias/conteudo',
-              paramenters: materia);
-        });
+  // Colapsed item com tópicos da matéria
+  _buildColapsedList(context, Materia materia) {
+    return ColapsedList(
+      materia.nome, 
+      materia.conteudos != null?
+        materia.conteudos.map((c) => 
+            Column(children: <Widget>[         
+              Divider(color: Colors.black),     
+              ListTile(
+                leading: Icon(Icons.description),
+                subtitle: Text(c.texto.length > 35? c.texto.substring(0,35) + "..." : c.texto),
+                title: Text(
+                  c.assunto,
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.w300
+                  ),
+                ),
+                onTap: () {
+                  pushPage(context, '/home/disciplina/materias/conteudo/',
+                      paramenters: c);
+              }),
+            ])
+          ).toList()
+        : [],
+    );
   }
 }

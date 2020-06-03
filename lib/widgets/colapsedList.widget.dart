@@ -1,12 +1,11 @@
 import 'package:app_distribuida2/theme/colors.theme.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class ColapsedItem extends StatelessWidget {
+class ColapsedList<T> extends StatelessWidget {
   final String _titulo;
-  final String _texto;
+  final List<Widget> _lista;
 
-  const ColapsedItem(this._titulo, this._texto);
+  const ColapsedList(this._titulo, this._lista);
 
   @override
   Widget build(BuildContext context) {
@@ -18,19 +17,13 @@ class ColapsedItem extends StatelessWidget {
         key: PageStorageKey<Key>(key),
         title: Text(
           _titulo,
-          style: TextStyle(color: Colors.black87),
+          style: TextStyle(
+            color: Colors.black,
+            fontWeight: FontWeight.w500
+          ),
         ),
-        children: [_content()],
+        children: _lista,
       ),
-    );
-  }
-
-  // Dados do collapsed
-  _content() {
-    return Container(
-      margin: const EdgeInsets.all(3.0),
-      padding: const EdgeInsets.all(3.0),
-      child: Text(_texto),
     );
   }
 }

@@ -1,7 +1,10 @@
+import 'conteudo.model.dart';
+
 class Materia {
   int id;
   int id_disciplina;
   String nome; 
+  List<Conteudo> conteudos;
 
   Materia(this.nome, this.id_disciplina, {this.id});
 

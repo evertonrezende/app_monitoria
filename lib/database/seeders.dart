@@ -1,3 +1,4 @@
+import 'package:app_distribuida2/models/conteudo.model.dart';
 import 'package:app_distribuida2/models/disciplina.model.dart';
 import 'package:app_distribuida2/models/duvida.model.dart';
 import 'package:app_distribuida2/models/materia.model.dart';
@@ -5,6 +6,7 @@ import 'package:app_distribuida2/models/usuario.model.dart';
 import 'package:sqflite/sqflite.dart';
 
 class Seeders {  
+  // Cria e popula a tabela de usuários
   static Future createUsuarios(Database db) async {    
       await db.execute(
           'CREATE TABLE usuarios (id INTEGER PRIMARY KEY AUTOINCREMENT, login VARCHAR, nome VARCHAR, senha VARCHAR, token VARCHAR, isMonitor INTEGER)');
@@ -14,6 +16,7 @@ class Seeders {
       await db.insert('usuarios', user2.toJson());      
   }
   
+  // Cria e popula a tabela de disciplinas
   static Future createDisciplinas(Database db) async {    
       await db.execute(
           'CREATE TABLE disciplinas (id INTEGER PRIMARY KEY AUTOINCREMENT, nome VARCHAR, favorita INTEGER)');      
@@ -33,6 +36,7 @@ class Seeders {
       await db.insert('disciplinas', d7.toJson()); 
   }
 
+  // Cria e popula a tabela de matérias
   static createMaterias(Database db) async {
       await db.execute(
           'CREATE TABLE materias (id INTEGER PRIMARY KEY AUTOINCREMENT, nome VARCHAR, id_disciplina INTEGER)');    
@@ -84,11 +88,95 @@ class Seeders {
       await db.insert('materias', m17.toJson());
   }
   
-  static createTopicos(Database db) async {
+  // Cria e popula a tabela de tópicos
+  static createConteudos(Database db) async {    
       await db.execute(
-          'CREATE TABLE topicos (id INTEGER PRIMARY KEY AUTOINCREMENT, assunto VARCHAR, texto TEXT, likes INTEGER, deslikes INTEGER)');
+          'CREATE TABLE conteudos (id INTEGER PRIMARY KEY AUTOINCREMENT, assunto VARCHAR, texto TEXT, id_materia INTEGER, likes INTEGER, deslikes INTEGER)');             
+      var c1 = new Conteudo(1, "Exemplo Prático: Lista de Contatos", _getLoremIpsumText(), 2, 0);
+      var c2 = new Conteudo(1, "Trabalhando com Lista Duplamente Encadeada", _getLoremIpsumText(), 15, 0);
+      await db.insert('conteudos', c1.toJson());
+      await db.insert('conteudos', c2.toJson());
+
+      var c3 = new Conteudo(2, "Como Inverter uma Pilha", _getLoremIpsumText(), 12, 2);
+      var c4 = new Conteudo(2, "Por Que o Conceito de Ponteiros é Importante em Pilha", _getLoremIpsumText(), 1, 0);
+      await db.insert('conteudos', c3.toJson());
+      await db.insert('conteudos', c4.toJson());
+
+      var c5 = new Conteudo(3, "Exemplo Prático: Fila de Processos", _getLoremIpsumText(), 0, 0);
+      await db.insert('conteudos', c5.toJson());
+
+      
+      
+      var c6 = new Conteudo(4, "Entendendo Polimorfismo", _getLoremIpsumText(), 12, 2);
+      var c7 = new Conteudo(4, "Quando Seu Usa Polimorfismo?", _getLoremIpsumText(), 1, 0);
+      await db.insert('conteudos', c6.toJson());
+      await db.insert('conteudos', c7.toJson());
+
+      var c8 = new Conteudo(5, "Herança Múltipla Com Java", _getLoremIpsumText(), 10, 0);
+      await db.insert('conteudos', c8.toJson());
+
+
+      
+      var c9 = new Conteudo(6, "O Que é Indeterminação?", _getLoremIpsumText(), 12, 2);
+      var c10 = new Conteudo(6, "O Que é o Infinito?", _getLoremIpsumText(), 1, 0);
+      await db.insert('conteudos', c9.toJson());
+      await db.insert('conteudos', c10.toJson());
+
+      var c11 = new Conteudo(7, "Como Usar Derivada no Geogebra?", _getLoremIpsumText(), 10, 0);
+      var c12 = new Conteudo(7, "Exemplo Prático: Derivada em um Software", _getLoremIpsumText(), 10, 0);
+      await db.insert('conteudos', c11.toJson());
+      await db.insert('conteudos', c12.toJson());
+      
+
+      
+      var c13 = new Conteudo(8, "Round Robin Explicado", _getLoremIpsumText(), 12, 2);
+      var c14 = new Conteudo(8, "Exemplo Prático: Shortest Job First (SJF)", _getLoremIpsumText(), 1, 0);
+      await db.insert('conteudos', c13.toJson());
+      await db.insert('conteudos', c14.toJson());
+
+      var c15 = new Conteudo(9, "Usando \"Semáforos\" em C#", _getLoremIpsumText(), 10, 0);
+      await db.insert('conteudos', c15.toJson());
+
+      
+
+      var c16 = new Conteudo(8, "O Que é Circuito Euleriano?", _getLoremIpsumText(), 7, 0);
+      await db.insert('conteudos', c16.toJson());
+
+      var c17 = new Conteudo(11, "O Que é Circuito Hamiltoniano?", _getLoremIpsumText(), 6, 0);
+      await db.insert('conteudos', c17.toJson());
+      
+      var c18 = new Conteudo(12, "Exemplo Prático: Busca em Profundidade em Python", _getLoremIpsumText(), 5, 0);
+      await db.insert('conteudos', c18.toJson());
+            
+      
+      
+      var c19 = new Conteudo(13, "Operador Condicional Ternário", _getLoremIpsumText(), 8, 0);
+      await db.insert('conteudos', c19.toJson());
+
+      var c20 = new Conteudo(14, "Exemplo Prático: Multiplicação de Matrizes", _getLoremIpsumText(), 19, 0);
+      var c21 = new Conteudo(14, "Entendendo Matrizes", _getLoremIpsumText(), 10, 0);
+      await db.insert('conteudos', c20.toJson());
+      await db.insert('conteudos', c21.toJson());
+      
+      var c22 = new Conteudo(15, "Diferença Entre While e Do-While", _getLoremIpsumText(), 1, 0);
+      var c23 = new Conteudo(15, "Loop Infinito", _getLoremIpsumText(), 0, 0);
+      await db.insert('conteudos', c22.toJson());
+      await db.insert('conteudos', c23.toJson());
+
+      
+      
+      var c24 = new Conteudo(16, "Exemplo Prático: Closures Com C#", _getLoremIpsumText(), 13, 0);
+      var c25 = new Conteudo(16, "O Que São Closures?", _getLoremIpsumText(), 30, 1);
+      await db.insert('conteudos', c24.toJson());
+      await db.insert('conteudos', c25.toJson());
+
+      var c26 = new Conteudo(17, "Exemplo Prático: LinQ para Manipulação de Dados", _getLoremIpsumText(), 20, 0);
+      var c27 = new Conteudo(17, "O Que é LinQ?", _getLoremIpsumText(), 10, 1);
+      await db.insert('conteudos', c26.toJson());
+      await db.insert('conteudos', c27.toJson());
   }
   
+  // Cria e popula a tabela de dúvidas
   static createDuvidas(Database db) async {
       await db.execute(
           'CREATE TABLE duvidas (id INTEGER PRIMARY KEY AUTOINCREMENT, id_aluno INTEGER, id_materia INTEGER, assunto TEXT, resposta TEXT, util INTEGER)');
@@ -99,5 +187,22 @@ class Seeders {
       await db.insert('duvidas', d1.toJson());
       await db.insert('duvidas', d2.toJson());
       await db.insert('duvidas', d3.toJson());
+  }  
+
+  // Retorna texto 'lorem ispum dolor sit amet'
+  static String _getLoremIpsumText() {
+    return "Lorem ipsum dolor sit amet, consectetur adipiscing elit. " +
+    "Fusce et sollicitudin est. Suspendisse posuere nisl eu condimentum " +
+    "lacinia. Nam velit ligula, vulputate scelerisque imperdiet et, euismod " + 
+    "ac metus. Donec eget aliquam ligula, sit amet convallis nisi. Aliquam sed " +
+    "congue tortor. Aliquam mattis, dolor at sagittis cursus, neque lacus iaculis " + 
+    "turpis, id mattis nisl libero eu risus. Maecenas eu rhoncus turpis. Donec faucibus, " +
+    "erat vitae pulvinar ullamcorper, leo elit fringilla mi, quis maximus eros urna at sapien. " + 
+    "Duis at risus ut quam pulvinar pharetra. Nullam vestibulum sit amet lacus vitae mollis. " +
+    "Aliquam sed congue tortor. Aliquam mattis, dolor at sagittis cursus, neque lacus iaculis " +
+    "turpis, id mattis nisl libero eu risus. Maecenas eu rhoncus turpis. Donec faucibus, " + 
+    "erat vitae pulvinar ullamcorper, leo elit fringilla mi, quis maximus eros urna at " + 
+    "sapien. Duis at risus ut quam pulvinar pharetra. Nullam vestibulum sit amet lacus vitae mollis.";
   }
+
 }

@@ -1,4 +1,5 @@
 import 'package:app_distribuida2/theme/colors.theme.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:app_distribuida2/routes.dart' as Routes;
 
@@ -8,10 +9,13 @@ class MyApp extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarIconBrightness: Brightness.light
+    ));
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        accentColor: Colors.white, //cor da tabs
         primaryColor: Colors.grey[400],
         brightness: Brightness.light,
         scaffoldBackgroundColor: ColorTheme.primaryColor,
