@@ -10,7 +10,7 @@ class MonitorApi extends ApiProvider {
     try {
       //Recebe a string no formato json e transforma no formato Map
       List<Monitor> mapResponse = new List<Monitor>();
-      mapResponse.add(Monitor.fromJson({"id": 1, "nome": "André Maglhães"}));
+      mapResponse.add(Monitor.fromJson({"id": 1, "nome": "André Magalhães"}));
       mapResponse.add(Monitor.fromJson({"id": 2, "nome": "Jorge Batista"}));
       mapResponse.add(Monitor.fromJson({"id": 3, "nome": "Zoey Trivellato"}));
 

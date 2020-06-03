@@ -1,33 +1,32 @@
-import 'package:app_distribuida2/models/conteudo.model.dart';
+import 'package:app_distribuida2/models/duvida.model.dart';
 import 'package:app_distribuida2/theme/colors.theme.dart';
 import 'package:app_distribuida2/utils/navigator.dart';
 import 'package:app_distribuida2/widgets/diagonalClipper.widget.dart';
 import 'package:flutter/material.dart';
-import './conteudo.module.dart' as Module;
+import './lerDuvidas.module.dart' as Module;
 
-class ConteudoPage extends StatefulWidget {
-  final Conteudo _conteudo;
+class LerDuvidaPage extends StatefulWidget {
+  final Duvida _duvida;
 
-  ConteudoPage(this._conteudo);
+  LerDuvidaPage(this._duvida);
 
   @override
-  _ConteudoPageState createState() => _ConteudoPageState(_conteudo);
+  _LerDuvidaPageState createState() => _LerDuvidaPageState(_duvida);
 }
 
-class _ConteudoPageState extends State<ConteudoPage> {
-  Conteudo _conteudo;
+class _LerDuvidaPageState extends State<LerDuvidaPage> {
+  Duvida _duvida;
   final double _imageHeight = 256.0;
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
-  bool _feedbackEnable = true;
   
-  _ConteudoPageState(this._conteudo);
+  _LerDuvidaPageState(this._duvida);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
-        title: Text("Tópico", style: Theme.of(context).textTheme.headline6),
+        title: Text("Dúvida", style: Theme.of(context).textTheme.headline6),
         centerTitle: true,
         backgroundColor: ColorTheme.primaryColor,
         leading: IconButton(
@@ -46,7 +45,7 @@ class _ConteudoPageState extends State<ConteudoPage> {
     return ClipPath(
         clipper: DialogonalClipper(),
         child: Image.asset(
-          'assets/images/leitura.jpg',
+          'assets/images/duvida.jpg',
           fit: BoxFit.fitHeight,
           height: _imageHeight,
           colorBlendMode: BlendMode.srcOver,
@@ -61,9 +60,9 @@ class _ConteudoPageState extends State<ConteudoPage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
-            (_conteudo.assunto).length > 40
-                ? (_conteudo.assunto).substring(0, 40) + "..."
-                : (_conteudo.assunto),                
+            (_duvida.assunto).length > 40
+                ? (_duvida.assunto).substring(0, 40) + "..."
+                : (_duvida.assunto),                
             style: TextStyle(
                 fontSize: 22.0,
                 color: Colors.white,
@@ -84,14 +83,14 @@ class _ConteudoPageState extends State<ConteudoPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Text(
-              _conteudo.assunto, 
+              "PERGUNTA: " + _duvida.assunto, 
               style: TextStyle(
                 fontSize: 12.0,
                 fontWeight: FontWeight.w400)       
             ),
             Padding(padding: EdgeInsets.symmetric(vertical: 5)),
             Text(
-              _conteudo.texto,
+              "RESPOSTA: " + _duvida.resposta,
               textAlign: TextAlign.justify,
               style: TextStyle(
                   fontSize: 16.0,
@@ -99,64 +98,55 @@ class _ConteudoPageState extends State<ConteudoPage> {
                   fontWeight: FontWeight.w300),
             ),
             Divider(),
-            Padding(padding: EdgeInsets.only(top: 20),
-              child: Text("Esse artigo foi útil?")
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[ 
-                  _buildReactButtons(Icons.thumb_up, "Útil", true),
-                  _buildReactButtons(Icons.thumb_down, "Não Útil", false),
-                ],
-              )
-            )
+            if(_duvida.util == null)
+              ..._buildSessaoAvaliacao()
         ],
       )
     );
   }
 
+  List<Widget> _buildSessaoAvaliacao() {
+    return [      
+        Padding(padding: EdgeInsets.only(top: 20),
+          child: Text("Esse resposta foi útil?")
+        ),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[ 
+              _buildReactButtons(Icons.thumb_up, "Útil", true),
+              _buildReactButtons(Icons.thumb_down, "Não Útil", false),
+            ],
+          )
+        )
+    ];
+  }
+
   Widget _buildReactButtons(IconData icon, String text, bool util) {
     return Column(
       children: <Widget>[
-        Row(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            IconButton(
-              color: ColorTheme.primaryColor,
-              icon: Icon(icon),
-              onPressed: _feedbackEnable? () { _feedbackFunction(util); } : null
-            ),
-            Text(util? _conteudo.likes.toString() : _conteudo.deslikes.toString())
-          ],
+        IconButton(
+          color: ColorTheme.primaryColor,
+          icon: Icon(icon),
+          onPressed: () {
+            setState(() {
+              _duvida.util = util;
+              Module.setDuvidaUtil(context, _duvida.id, _duvida.util)
+                .then((value) {                  
+                  final snackBar = SnackBar(
+                    content: Text('Obrigado! Sua opinião é importante para nós.'),
+                    duration: Duration(seconds: 3),
+                  );
+
+                  _scaffoldKey.currentState.showSnackBar(snackBar);
+                })
+                .catchError((e) =>  _duvida.util = !_duvida.util);                
+            });
+          },
         ),
         Text(text, style: TextStyle(fontWeight: FontWeight.w500))
       ]
     );
-  }
-
-  _feedbackFunction(bool util) {
-      setState(() {
-        _feedbackEnable = false;
-        if(util) _conteudo.likes += 1;
-        else _conteudo.deslikes += 1;
-
-        Module.setFeedback(context, _conteudo.id, util)
-          .then((value) {                      
-            final snackBar = SnackBar(
-              content: Text('Obrigado! Sua opinião é importante para nós.'),
-              duration: Duration(seconds: 3),
-            );
-
-            _scaffoldKey.currentState.showSnackBar(snackBar);
-          })
-          .catchError((e) {                      
-            if(util) _conteudo.likes -= 1;
-            else _conteudo.deslikes -= 1;
-
-            _feedbackEnable = true;
-          });
-      });
   }
 }

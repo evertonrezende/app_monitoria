@@ -181,9 +181,9 @@ class Seeders {
       await db.execute(
           'CREATE TABLE duvidas (id INTEGER PRIMARY KEY AUTOINCREMENT, id_aluno INTEGER, id_materia INTEGER, assunto TEXT, resposta TEXT, util INTEGER)');
       
-      var d1 = new Duvida(1, 1, "O que é uma lista?", null, true);
-      var d2 = new Duvida(1, 7, "Como resolvo uma derivada de função potência?", null, true);
-      var d3 = new Duvida(2, 7, "Por que quando altero meu objeto pilha também altero a cópia dele?", null, true);
+      var d1 = new Duvida(1, 1, "O que é uma lista?", _getLoremIpsumText(), null);
+      var d2 = new Duvida(1, 7, "Como resolvo uma derivada de função potência?", _getLoremIpsumText(), null);
+      var d3 = new Duvida(2, 7, "Por que quando altero meu objeto pilha também altero a cópia dele?", null, null);
       await db.insert('duvidas', d1.toJson());
       await db.insert('duvidas', d2.toJson());
       await db.insert('duvidas', d3.toJson());

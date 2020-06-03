@@ -30,7 +30,7 @@ class MonitoresPage extends StatelessWidget {
             snapshot.data.forEach((m) => monitoresData.add(ItemList(m.nome, "Disciplina X | Disponível de 10:00 as 12:00")));
 
             return Container(
-              color: ColorTheme.backgroundColor,
+              color: ColorTheme.backgroundNeutroColor,
               child: ListView(
                 children: monitoresData
               ),

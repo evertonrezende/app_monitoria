@@ -12,20 +12,17 @@ class DisciplinaApi extends ApiProvider {
       Database db = await ApiProvider.getDatabase();
       List<Map> mapResponse = await db.query('disciplinas');
 
-      //Recebe a string no formato json e transforma no formato Map
       if(mapResponse.isNotEmpty) {      
         final disciplinas = mapResponse.map((m) => Disciplina.fromJson(m)).toList();
         return ApiResponse.ok(disciplinas);
       }
 
-      // error é o que é retornado da API caso o login ou senha esteja incorreto
       return ApiResponse.error("Não foi possível recuperar as disciplinas");
     } 
     catch (error) {
       return ApiResponse.error("Não foi possível recuperar as disciplinas");
     }
   }
-
   
   // Retorna as disciplinas cadastradas no sistema
   static Future<ApiResponse<dynamic>> setDisciplinaFavorita(int id_disciplina, bool favorita) async {
@@ -39,6 +36,24 @@ class DisciplinaApi extends ApiProvider {
     } 
     catch (error) {
       return ApiResponse.error("Não foi possível marcar a disciplina como favorita");
+    }
+  }
+  
+  // Retorna uma disciplina cadastrada no sistema
+  static Future<ApiResponse<Disciplina>> getDisciplina(int id_disciplina) async {
+    try {
+      Database db = await ApiProvider.getDatabase();
+      List<Map> mapResponse = await db.query('disciplinas', where: "id = ?", whereArgs: [id_disciplina], limit: 1);
+
+      if(mapResponse.isNotEmpty) {      
+        Disciplina disciplina = Disciplina.fromJson(mapResponse.first);
+        return ApiResponse.ok(disciplina);
+      }
+
+      return ApiResponse.error("Não foi possível recuperar a disciplina");
+    } 
+    catch (error) {
+      return ApiResponse.error("Não foi possível recuperar a disciplina");
     }
   }
 }

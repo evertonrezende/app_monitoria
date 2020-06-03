@@ -1,3 +1,5 @@
+import 'materia.model.dart';
+
 class Duvida {
   int id;
   int id_aluno;
@@ -5,6 +7,8 @@ class Duvida {
   String assunto;  
   String resposta;  
   bool util;
+
+  Materia materia;
 
   Duvida(this.id_aluno, this.id_materia, this.assunto, this.resposta, this.util);
 

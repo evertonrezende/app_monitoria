@@ -1,3 +1,4 @@
+import 'package:app_distribuida2/pages/lerDuvidaPage/lerDuvida.page.dart';
 import 'package:app_distribuida2/pages/perguntasFrequentesPage/perguntasFrequentes.page.dart';
 import 'package:app_distribuida2/pages/conteudoPage/conteudo.page.dart';
 import 'package:app_distribuida2/pages/materiasPage/materias.page.dart';
@@ -24,6 +25,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => MetricasPage());
     case '/home/disciplina/materias':
       return MaterialPageRoute(builder: (context) => MateriasPage(settings.arguments));
+    case '/home/duvida/':
+      return MaterialPageRoute(builder: (context) => LerDuvidaPage(settings.arguments));
     case '/home/disciplina/materias/conteudo/':
       return MaterialPageRoute(builder: (context) => ConteudoPage(settings.arguments));
     case '/home/disciplina/materias/perguntas-frequentes':

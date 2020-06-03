@@ -1,5 +1,6 @@
 import 'package:app_distribuida2/models/duvida.model.dart';
 import 'package:app_distribuida2/theme/colors.theme.dart';
+import 'package:app_distribuida2/utils/navigator.dart';
 import 'package:app_distribuida2/widgets/searchBox.widget.dart';
 import 'package:flutter/material.dart';
 import './duvidas.module.dart' as Module;
@@ -12,6 +13,7 @@ class DuvidasPage extends StatefulWidget {
 class _Duvidas extends State<DuvidasPage> {
   List<Duvida> _duvidas = <Duvida>[];
   List<Duvida> _duvidasFiltered = <Duvida>[];
+  bool _isLoading = true;
 
   @override
   void initState() {
@@ -20,33 +22,50 @@ class _Duvidas extends State<DuvidasPage> {
       setState(() {
         _duvidas = _duvidasFiltered = result;
       })
-    });
+    }).whenComplete(() => setState(() {_isLoading = false;}));
   }
 
   @override
   Widget build(BuildContext context) {
+    return _isLoading? _buildWaitingWidget() :
+      Container(
+        color: ColorTheme.backgroundNeutroColor,
+        child: Column(
+          mainAxisSize: MainAxisSize.max, 
+          children: <Widget>[
+            _searchBox(), 
+            Expanded(
+              child: ListView.builder(
+              itemCount: _duvidasFiltered.length,
+              itemBuilder: (BuildContext context, int index) {
+                return _buildCardDuvida(_duvidasFiltered[index], index + 1 == _duvidasFiltered.length);                      
+              })
+            )
+        ]));
+  }
+  
+  // Loading
+  Widget _buildWaitingWidget() {
     return Container(
-      color: ColorTheme.backgroundNeutroColor,
-      child: Column(
-        mainAxisSize: MainAxisSize.max, 
-        children: <Widget>[
-          _searchBox(), 
-          Expanded(
-            child: ListView.builder(
-            itemCount: _duvidasFiltered.length,
-            itemBuilder: (BuildContext context, int index) {
-              return _buildCardDuvida(_duvidasFiltered[index], index + 1 == _duvidasFiltered.length);                      
-            })
-          )
-      ]));
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          color: ColorTheme.backgroundNeutroColor,
+        ),
+        child: CircularProgressIndicator(),
+      );
   }
 
+  // Card com informações da dúvida
   _buildCardDuvida(Duvida duvida, bool last_card) {
       return GestureDetector(
+        onTap: () {
+          if(duvida.resposta != null)
+            pushPage(context, '/home/duvida/', paramenters: duvida);
+        },
         child: Container(
           padding: EdgeInsets.all(10),
           margin: EdgeInsets.only(bottom: last_card? 50 : 5, left: 10, right: 10),
-          color: ColorTheme.secondaryColor,
+          color: duvida.resposta == null? Colors.grey : ColorTheme.secondaryColor,
           child: Row(children: <Widget>[
             Padding(
               padding: EdgeInsets.only(right: 10),
@@ -58,13 +77,17 @@ class _Duvidas extends State<DuvidasPage> {
                 children: <Widget>[
                   Text(duvida.assunto, style: TextStyle(fontWeight: FontWeight.w500)),
                   Text(
-                      "Disciplina: XXX | Matéria: XXX", 
+                      "Disciplina: ${duvida.materia.disciplina.nome} | Matéria: ${duvida.materia.nome}", 
                       style: TextStyle(fontSize: 12, fontWeight: FontWeight.w300)
                   ),
                   Divider(),
                   Text(
-                      "Aguardando Resposta", 
-                      style: TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.w300)
+                      duvida.resposta == null? "Aguardando Resposta" : "Respondida", 
+                      style: TextStyle(
+                        color: duvida.resposta == null? Colors.white : Colors.yellowAccent, 
+                        fontSize: 12, 
+                        fontWeight: FontWeight.w300
+                      )
                   )
                 ])
             )
