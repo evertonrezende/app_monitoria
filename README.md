@@ -3,7 +3,6 @@
 
 "Monitoria Acadêmica Digital" é um aplicativo mobile desenvolvido por meio da tecnologia Flutter que visa possibilitar que alunos do curso de Sistemas de Informação da Pontifícia Universidade Católica de Minas Gerais possam sanar suas dúvidas por meio da monitoria online. Além disso, monitores conseguem ter a portabilidade e praticidade ao auxiliar alunos com respostas e conteúdos direcionados. Nossa solução busca integrar em um mesmo sistema funções como:
 - Postagem de dúvidas
-- Postagem de resposta a dúvidas existentes (Somente monitores)
 - Visualização de conteúdo das disciplinas
 - Métricas sobre dúvidas mais recorrentes (Somente monitores)
 
@@ -31,9 +30,13 @@ Equipe
 ***
 Informações Gerais
 ------
-O aplicativo está **```em desenvolvimento```**, atualmente para realizar o login é necessário utilizar as seguintes credenciais:
+Para realizar o login é necessário utilizar as seguintes credenciais:
+(Como aluno)
+* login: aluno
+* senha: 123
 
-* login: admin
+(Como monitor)
+* login: monitor
 * senha: 123
 
 [logo]: https://img.icons8.com/offices/30/000000/curriculum.png "Logo"
