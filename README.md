@@ -10,6 +10,24 @@ Segue alguns prints de telas prontas ![love][heart]
 
 ![Foto 1][foto1]
 
+![Foto 2][foto2]
+
+![Foto 3][foto3]
+
+![Foto 4][foto4]
+
+![Foto 5][foto5]
+
+![Foto 6][foto6]
+
+![Foto 7][foto7]
+
+![Foto 8][foto8]
+
+![Foto 9][foto9]
+
+![Foto 10][foto10]
+
 ***
 Contexto da Disciplina
 ------
@@ -44,13 +62,13 @@ Para realizar o login é necessário utilizar as seguintes credenciais:
 [heart]: https://img.icons8.com/material-two-tone/24/000000/novel.png "Heart"
 
 
-[foto1]: https://ibb.co/yfzCYPV "Foto 1"
-[foto2]: https://ibb.co/nLHst6g "Foto 2"
-[foto3]: https://ibb.co/d5QSJmp "Foto 3"
-[foto4]: https://ibb.co/513Cd92 "Foto 4"
-[foto5]: https://ibb.co/k8fW55p "Foto 5"
-[foto6]: https://ibb.co/0KrK53W "Foto 6"
-[foto7]: https://ibb.co/jrf2WPv "Foto 7"
-[foto8]: https://ibb.co/YcSv7Jf "Foto 8"
-[foto9]: https://ibb.co/ryNK67c "Foto 9"
-[foto10]: https://ibb.co/GC26RB2 "Foto 10"
+[foto1]: https://i.ibb.co/DwCJQsC/foto1.jpg "Foto 1"
+[foto2]: https://i.ibb.co/MNQyV2G/foto2.jpg "Foto 2"
+[foto3]: https://i.ibb.co/Cbyx54V/foto3.jpg "Foto 3"
+[foto4]: https://i.ibb.co/sVRG6dv/foto4.jpg "Foto 4"
+[foto5]: https://i.ibb.co/YXhXgGK/foto5.jpg "Foto 5"
+[foto6]: https://i.ibb.co/QNR1ppZ/foto6.jpg "Foto 6"
+[foto7]: https://i.ibb.co/rQhqgtv/foto7.jpg "Foto 7"
+[foto8]: https://i.ibb.co/crNPXY8/foto8.jpg "Foto 8"
+[foto9]: https://i.ibb.co/P67Z0Fm/foto9.jpg "Foto 9"
+[foto10]: https://i.ibb.co/cgW9C3x/foto10.jpg "Foto 10"
