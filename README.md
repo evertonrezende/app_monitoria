@@ -6,9 +6,9 @@
 - Visualização de conteúdo das disciplinas
 - Métricas sobre dúvidas mais recorrentes (Somente monitores)
 
-Aqui iremos colocar alguns prints de telas prontas ![love][heart]
+Segue alguns prints de telas prontas ![love][heart]
 
-[TELAS]
+![Foto 1][foto1]
 
 ***
 Contexto da Disciplina
@@ -42,3 +42,15 @@ Para realizar o login é necessário utilizar as seguintes credenciais:
 
 [logo]: https://img.icons8.com/offices/30/000000/curriculum.png "Logo"
 [heart]: https://img.icons8.com/material-two-tone/24/000000/novel.png "Heart"
+
+
+[foto1]: https://ibb.co/yfzCYPV "Foto 1"
+[foto2]: https://ibb.co/nLHst6g "Foto 2"
+[foto3]: https://ibb.co/d5QSJmp "Foto 3"
+[foto4]: https://ibb.co/513Cd92 "Foto 4"
+[foto5]: https://ibb.co/k8fW55p "Foto 5"
+[foto6]: https://ibb.co/0KrK53W "Foto 6"
+[foto7]: https://ibb.co/jrf2WPv "Foto 7"
+[foto8]: https://ibb.co/YcSv7Jf "Foto 8"
+[foto9]: https://ibb.co/ryNK67c "Foto 9"
+[foto10]: https://ibb.co/GC26RB2 "Foto 10"
