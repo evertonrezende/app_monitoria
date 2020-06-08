@@ -31,6 +31,7 @@ Equipe
 Informações Gerais
 ------
 Para realizar o login é necessário utilizar as seguintes credenciais:
+
 (Como aluno)
 * login: aluno
 * senha: 123
